@@ -1,4 +1,4 @@
-# raspi-vivarium
+# Raspberry Pi Vivarium Monitor / Controller
 Raspberry Pi Vivarium monitoring / control project.
 
 ## Introduction
