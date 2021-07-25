@@ -23,7 +23,9 @@ For those young enough to not know what an IDE or PATA cable is, it's a 40 pin r
 # Temp/Humidity Sensor
 The first step will be to connect a basic DHT11/DHT22 (from here on in I will just call them DHTs) to the Pi.
 
+![DHT11/22 Pins](/images/DHT22_pinout.jpg)
 
+Connecting the sensor to the Raspberry Pi is quite simple as follows:
 
 DHT pin 1 (left) > 3.3v (pin 1)
 DHT pin 2 > 10K resistor
