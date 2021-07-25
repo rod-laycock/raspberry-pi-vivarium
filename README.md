@@ -33,6 +33,18 @@ Connecting the sensor to the Raspberry Pi is quite simple as follows:
 - DHT pin 3 - Not connected
 - DHT pin 4 (right) > ground (pin 6) 
 
+# Preparing the Raspberry Pi
+As always, you need to update and install Python (well, what other language would you use to monitor snakes?).
+
+    sudo apt-get update
+    sudo apt-get upgrade
+    sudo apt-get install build-essential python-dev python-openssl git
+
+In order to use the DHT we need to install some additional libraries
+
+    sudo pip3 install adafruit-circuitpython-dht
+    sudo apt-get install libgpiod2
+
 # Source code
 The source code for this is presently being developed - stay tuned.
 
