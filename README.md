@@ -20,6 +20,17 @@ The DHT11 is a cheap sensor, but the DHT22 is more precise and will last longer,
 
 For those young enough to not know what an IDE or PATA cable is, it's a 40 pin ribbon cable which used to connect hard disks to motherboards, we are using this to avoid soldering directly onto the Raspberry Pi's 40 pin extension slot (almost like these 2 were made for each other isn't it). 
 
+# Temp/Humidity Sensor
+The first step will be to connect a basic DHT11/DHT22 (from here on in I will just call them DHTs) to the Pi.
+
+
+
+DHT pin 1 (left) > 3.3v (pin 1)
+DHT pin 2 > 10K resistor
+  10K resistor > a free IO port (pin 7)
+DHT pin 3 - connects to nothing
+DHT pin 4 (right) > ground (pin 6) 
+
 
 # Appendix A - Shopping
 Here are some stores to buy essentials from:
