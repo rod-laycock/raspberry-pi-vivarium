@@ -32,7 +32,6 @@ Depending on how many vivariums you want to monitor will denote the type of Rasp
 
 The DHT11 is a cheap sensor, but the DHT22 is more precise and will last longer, your call which one to opt for, there are others available and I found a quick [comparison site](https://kandrsmith.org/RJS/Misc/Hygrometers/calib_many.html) on other alternatives (warning - this site contains electronic tech speak).
 
-For those young enough to not know what an IDE or PATA cable is, it's a 40 pin ribbon cable which used to connect hard disks to motherboards, we are using this to avoid soldering directly onto the Raspberry Pi's 40 pin extension slot (almost like these 2 were made for each other isn't it). 
 
 # Temp/Humidity Sensor
 The first step will be to connect a basic DHT11/DHT22 (from here on in I will just call them DHTs) to the Pi.
