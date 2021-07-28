@@ -17,14 +17,18 @@ As We need to measure the humidity across the vivarium and the temperature at bo
 
 ## Components Required
 The following components, and a little skill will be required, please note I get most of my stuff from [The Pi Hut](https://thepihut.com/collections/raspberry-pi-store) but other parts are available from other stores (I have listed some of them in the Appendix):
-- A Raspberry Pi 
-- DHT11 or DHT22 (or equivalent) temp/humidity probe
-- 10K resistor
-- wire / plugs
+- [A Raspberry Pi](https://thepihut.com/collections/raspberry-pi/products/raspberry-pi-4-model-b) 
+- [DHT11 or DHT22 (or equivalent) temp/humidity probe](https://www.amazon.co.uk/gp/product/B08HCHVC3W/)
+- [Solderless Breadboard](https://www.amazon.co.uk/gp/product/B08V183BFJ/)
+- [10K resistors](https://www.amazon.co.uk/gp/product/B091LYNNT5/)
+- [wire](https://www.amazon.co.uk/gp/product/B07G72DRKC/)
+- [IDC plugs/Crimping tool](https://www.amazon.co.uk/gp/product/B07VV3V6RP/)
+
+To make things more permanent:
 - soldering iron
 - heat shrink
 
-Depending on how many vivariums you want to monitor will denote the type you need, I'm going for a Raspberry Pi 4, because I have a couple spare.
+Depending on how many vivariums you want to monitor will denote the type of Raspberry Pi you'll need, I'm going for a Raspberry Pi 4, because I have a couple spare.
 
 The DHT11 is a cheap sensor, but the DHT22 is more precise and will last longer, your call which one to opt for, there are others available and I found a quick [comparison site](https://kandrsmith.org/RJS/Misc/Hygrometers/calib_many.html) on other alternatives (warning - this site contains electronic tech speak).
 
