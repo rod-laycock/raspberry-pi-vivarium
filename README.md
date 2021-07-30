@@ -32,11 +32,23 @@ Depending on how many vivariums you want to monitor will denote the type of Rasp
 
 The DHT11 is a cheap sensor, but the DHT22 is more precise and will last longer, your call which one to opt for, there are others available and I found a quick [comparison site](https://kandrsmith.org/RJS/Misc/Hygrometers/calib_many.html) on other alternatives (warning - this site contains electronic tech speak).
 
+# Equipment
+So the first delivery has arrived, and I'm quite impressed with the quality for the price.
+
+![Raspberry Pi](/images/raspberry_pi.jpg)
+
+![DHT22 Sensors](images/dht_sensors.jpg)
+
+![Crimp Kit](/images/crimping_kit_outside.jpg)
+![Crimp Kit](/images/crimping_kit_inside.jpg)
+![Breadboad & Resistors](/images/resistors_breadbord.jpg)
+
+So before we go and start hooking all of this together, let's just explore the temp sensor.
 
 # Temp/Humidity Sensor
 The first step will be to connect a basic DHT11/DHT22 (from here on in I will just call them DHTs) to the Pi.
 
-![DHT11/22 Pins](/images/DHT22_pinout.jpg)
+![DHT11/22 Pins](/images/dht22_pinout.jpg)
 
 Connecting the sensor to the Raspberry Pi is quite simple as follows:
 
