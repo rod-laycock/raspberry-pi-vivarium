@@ -53,8 +53,8 @@ The first step will be to connect a basic DHT11/DHT22 (from here on in I will ju
 Connecting the sensor to the Raspberry Pi is quite simple as follows:
 
 - DHT pin 1 (left) > 3.3v (pin 1)
-- DHT pin 2 > 10K resistor
-  - 10K resistor > a free IO port (pin 7)
+- Connect the 10K resistor across pins 1 and 2 on the DHT
+- DHT pin 2 > GPIO Pin 7
 - DHT pin 3 - Not connected
 - DHT pin 4 (right) > ground (pin 6) 
 
