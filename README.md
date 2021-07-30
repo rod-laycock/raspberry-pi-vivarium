@@ -2,18 +2,19 @@
 Raspberry Pi Vivarium monitoring / control project.
 
 ## Introduction
-I have 4 ball pythons and need to check the temperature, humidity (during shedding), etc.  So this project will begin as a sumple temp/humidity recorder with web access and could build up to include web-cams, temperature controller, over / under temperature alarms, door open sensors, etc.
+I have 4 ball pythons and need to ensure the temperature and humidity are always at the right levels.  So this project is starting life as a sumple temperature/humidity sensor & recorder with web access, but over time could build up to include web-cams, temperature controller, over / under temperature alarms, door open sensors, you get the jist.
+
 
 ### A quick introduction to Pythons
-Pythons (Python regius) are cold blooded reptiles originating from central Africa, which live in a vivarium (in UK captivity as it's too cold normally) with a heater on one side (the warm side) and hides on both the warm and opposite side (the cool side). This allows provides a gradiated temperate shift between the warm and cool side so the snake is free to move between the sides to regulate it's own temperature - Sir David Attenborough would be proud!
+Pythons (Python regius) are cold blooded reptiles originating from central Africa, which live in a vivarium (as it's normally too cold for in the UK) with a heater on one side (known as the warm side) and hides on both the warm and opposite side (the cool side). This warm / cold side provides a gradiated temperature shift between so allowing the snake to move freely between in order to regulate it's own temperature - Sir David Attenborough would be proud!
 
-They don't have eyelid, so need some element of moisture to protect their eyes (50% moisture is fine for them).
+Snakes don't have eyelid, so need moisture in the air to protect their eyes, and keep them hydrated, at around 50% - 60% moisture content.
 
-They are covered in overlapping scales which need to be shed approximately every 6 weeks (ish).  Shedding cycle can last about a week, and during this time it's best to have the moisture elevated (70%-80% moisture), this aids in them shedding as the snake skin is moisturised.  If the moisture is fine, the skin comes off in one.  If the moisture is too low, the skin comes off in chunks in a "blow out".  If the shed is a blow out, you may need to intervene in order to remove any old skin which remains after the shed.
+They are covered in overlapping scales which need to be shed approximately every 4-6 weeks, known as ecdysis.  End to end shedding cycles last about a week, and during this time it's best to have the moisture elevated (up to about 80% moisture), this aids in them shedding as the snake skin is moisturised.  If the moisture is fine, the skin comes off in one.  If the moisture is too low, the skin comes off in chunks in a "blow out".  If the shed is a blow out, you may need to intervene in order to remove any old skin which remains after the shed has completed.
 
-As We need to measure the humidity across the vivarium and the temperature at both ends, we wil need 2 sensors per vivarium - so by my maths, that's 8 temperature sensors (+ spares to replace any faulty ones).
+As We need to measure the humidity across the vivarium and the temperature at both ends, we will need 2 sensors per vivarium - so by my maths, that's 8 temperature sensors (+ spares to replace any faulty ones).
 
-[Wikipedia](https://en.wikipedia.org/wiki/Ball_python) has some good stuff on Pythons
+[Wikipedia](https://en.wikipedia.org/wiki/Ball_python) has some good stuff on Pythons, if you fancy a read
 
 ## Components Required
 The following components, and a little skill will be required, please note I get most of my stuff from [The Pi Hut](https://thepihut.com/collections/raspberry-pi-store) but other parts are available from other stores (I have listed some of them in the Appendix):
