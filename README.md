@@ -66,9 +66,11 @@ Login using ubuntu / ubuntu and change the password.
 
 By default ubuntu server is not connected to Wifi, it should be using ethernet, but that's so old hat ;)
 
-ls /sys/class/net - to find out the name of your device 'wlan0' is common.
+To find out the name of your wireless device, issue the command:
 
-      eth0   lo  wlan0
+    ls /sys/class/net
+
+    eth0   lo  wlan0
 
 sudo nano /etc/netplan/50-cloud-init.yaml
 
@@ -84,16 +86,23 @@ add the following to the end (ensure indents are followed)
 
 replacing [AccessPointSSID] and [AccessPointPassword] with the relevant details for your wifi
 
+now issue the following commands
+
+sudo netplan generate
+
+sudo netplan apply
+
+
 As always, you need to update and install Python (well, what other language would you use to monitor snakes?).
 
     sudo apt-get update
     sudo apt-get upgrade
-    sudo apt-get install build-essential python-dev python-openssl git
+    sudo apt-get install build-essential python-dev-is-python2 python3-pip git
 
 In order to use the DHT we need to install some additional libraries
 
-    sudo pip3 install adafruit-circuitpython-dht
-    sudo apt-get install libgpiod2
+    sudo pip3 install --upgrade Adafruit_DHT setuptools wheel
+    
 
 # Source code
 The source code for this is presently being developed - stay tuned.
