@@ -60,6 +60,30 @@ Connecting the sensor to the Raspberry Pi is quite simple as follows:
 - DHT pin 4 (right) > ground (pin 6) 
 
 # Preparing the Raspberry Pi
+Download and install selected OS of choice - I downloaded Ubuntu Server.
+
+Login using ubuntu / ubuntu and change the password.
+
+By default ubuntu server is not connected to Wifi, it should be using ethernet, but that's so old hat ;)
+
+ls /sys/class/net - to find out the name of your device 'wlan0' is common.
+
+      eth0   lo  wlan0
+
+sudo nano /etc/netplan/50-cloud-init.yaml
+
+add the following to the end (ensure indents are followed)
+
+    wifis:
+        wlan0:
+            dhcp4: true
+            optional: true
+            access-points: 
+                "[AccessPointSSID]":
+                    password: "[AccessPointPassword]"
+
+replacing [AccessPointSSID] and [AccessPointPassword] with the relevant details for your wifi
+
 As always, you need to update and install Python (well, what other language would you use to monitor snakes?).
 
     sudo apt-get update
