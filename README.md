@@ -1,7 +1,7 @@
 # Raspberry Pi Vivarium Monitor / Controller
 Raspberry Pi Vivarium monitoring / control project.
 
-## Introduction
+## Introduction.
 I have 4 ball pythons and need to ensure the temperature and humidity are always at the right levels.  So this project is starting life as a sumple temperature/humidity sensor & recorder with web access, but over time could build up to include web-cams, temperature controller, over / under temperature alarms, door open sensors, you get the jist.
 
 
