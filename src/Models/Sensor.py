@@ -6,10 +6,12 @@ from Models.BaseSensor import BaseSensor
 
 class Sensor(BaseSensor):
 
-    def __init__(self, name, pin):
+    def __init__(self, name, pin, minTemp, maxTemp, tempUnit):
         self.name = name
         self.pin = pin
-        super().__init__()
+        self.minTemp = minTemp
+        self.maxTemp = maxTemp
+        super().__init__(tempUnit)
 
     def Get_Pin(self):
         return BaseSensor.Get_Pin(self.pin)

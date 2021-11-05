@@ -1,0 +1,71 @@
+{
+    "MaxSensors": 8,
+    "TempUnit": "C",
+    "TimeZone": "GMT",
+    "Sensors": [
+        {
+            "Name": "Sensor 1",
+            "Port": "1",
+            "MinTemp": 25,
+            "MaxTemp": 32,
+            "MinHumidity": 10,
+            "MaxHumidity": 90
+        },
+        {
+            "Name": "Sensor 2",
+            "Port": "2",
+            "MinTemp": 25,
+            "MaxTemp": 32,
+            "MinHumidity": 10,
+            "MaxHumidity": 90
+        },
+        {
+            "Name": "Sensor 3",
+            "Port": "3",
+            "MinTemp": 25,
+            "MaxTemp": 32,
+            "MinHumidity": 10,
+            "MaxHumidity": 90
+        },
+        {
+            "Name": "Sensor 4",
+            "Port": "4",
+            "MinTemp": 25,
+            "MaxTemp": 32,
+            "MinHumidity": 10,
+            "MaxHumidity": 90
+        },
+        {
+            "Name": "Sensor 5",
+            "Port": "5",
+            "MinTemp": 25,
+            "MaxTemp": 32,
+            "MinHumidity": 10,
+            "MaxHumidity": 90
+        },
+        {
+            "Name": "Sensor 6",
+            "Port": "6",
+            "MinTemp": 25,
+            "MaxTemp": 32,
+            "MinHumidity": 10,
+            "MaxHumidity": 90
+        },
+        {
+            "Name": "Sensor 7",
+            "Port": "7",
+            "MinTemp": 25,
+            "MaxTemp": 32,
+            "MinHumidity": 10,
+            "MaxHumidity": 90
+        },
+        {
+            "Name": "Sensor 8",
+            "Port": "8",
+            "MinTemp": 25,
+            "MaxTemp": 32,
+            "MinHumidity": 10,
+            "MaxHumidity": 90
+        }
+    ]
+}

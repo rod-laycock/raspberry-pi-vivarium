@@ -15,9 +15,12 @@ PortPinMapping = {
 
 class BaseSensor():
 
+    # Set the default temperature unit
+    def __init__(self, tempUnit):
+        self.tempUnit = tempUnit
+        
     # Read the pin assigned to the port
     def Get_Pin(port):
-        print("lets find port " + str(port))
         return PortPinMapping.get(port)
 
     # Read the port assigned to the pin
