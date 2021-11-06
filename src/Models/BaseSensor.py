@@ -23,10 +23,10 @@ class BaseSensor():
     def Get_Pin(port):
         return PortPinMapping.get(port)
 
-    # Read the port assigned to the pin
-    def Get_Port(pin):
-        for _port, _pin in PortPinMapping.items():
-            if _pin == pin:
-                return _port
-        return None
+    # Read the port assigned to the pin - Is this ever going to be used?
+#    def Get_Port(pin):
+#        for _port, _pin in PortPinMapping.items():
+#            if _pin == pin:
+#                return _port
+#        return None
         

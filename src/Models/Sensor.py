@@ -4,20 +4,15 @@ from Models.BaseSensor import BaseSensor
 #    Name - so we can see it on screen
 #    Port - Which port on the back of the system is this connected too?
 
-class Sensor(BaseSensor):
+class Sensor():
 
-    def __init__(self, name, pin, minTemp, maxTemp, tempUnit):
+    def __init__(self, name, port, pin, comment, minTemp, maxTemp, tempUnit):
         self.name = name
+        self.port = port
         self.pin = pin
+        self.comment = comment
         self.minTemp = minTemp
         self.maxTemp = maxTemp
-        super().__init__(tempUnit)
-
-    def Get_Pin(self):
-        return BaseSensor.Get_Pin(self.pin)
-    
-    def GetPort(self):
-        return BaseSensor.Get_Port(self.pin)
-    
+        self.tempUnit = tempUnit
     
   

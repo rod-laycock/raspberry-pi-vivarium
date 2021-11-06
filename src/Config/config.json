@@ -1,11 +1,15 @@
 {
     "MaxSensors": 8,
+    "SensorType": "DHT22",
+    "PollFrequency": 5,
     "TempUnit": "C",
     "TimeZone": "GMT",
     "Sensors": [
         {
             "Name": "Sensor 1",
-            "Port": "1",
+            "Port": 1,
+            "Pin": 29,
+            "Comment": "GPIO 5",
             "MinTemp": 25,
             "MaxTemp": 32,
             "MinHumidity": 10,
@@ -13,7 +17,9 @@
         },
         {
             "Name": "Sensor 2",
-            "Port": "2",
+            "Port": 2,
+            "Pin" : 31, 
+            "Comment": "GPIO 6",
             "MinTemp": 25,
             "MaxTemp": 32,
             "MinHumidity": 10,
@@ -21,7 +27,9 @@
         },
         {
             "Name": "Sensor 3",
-            "Port": "3",
+            "Port": 3,
+            "Pin": 37,
+            "Comment": "GPIO 26",
             "MinTemp": 25,
             "MaxTemp": 32,
             "MinHumidity": 10,
@@ -29,7 +37,9 @@
         },
         {
             "Name": "Sensor 4",
-            "Port": "4",
+            "Port": 4,
+            "Pin": 36,
+            "Comment": "GPIO 16", 
             "MinTemp": 25,
             "MaxTemp": 32,
             "MinHumidity": 10,
@@ -37,7 +47,9 @@
         },
         {
             "Name": "Sensor 5",
-            "Port": "5",
+            "Port": 5,
+            "Pin": 22,
+            "Comment": "GPIO 25",
             "MinTemp": 25,
             "MaxTemp": 32,
             "MinHumidity": 10,
@@ -45,7 +57,9 @@
         },
         {
             "Name": "Sensor 6",
-            "Port": "6",
+            "Port": 6,
+            "Pin": 16,
+            "Comment": "GPIO 23",
             "MinTemp": 25,
             "MaxTemp": 32,
             "MinHumidity": 10,
@@ -53,7 +67,9 @@
         },
         {
             "Name": "Sensor 7",
-            "Port": "7",
+            "Port": 7,
+            "Pin": 18,
+            "Comment": "GPIO 24",
             "MinTemp": 25,
             "MaxTemp": 32,
             "MinHumidity": 10,
@@ -61,7 +77,9 @@
         },
         {
             "Name": "Sensor 8",
-            "Port": "8",
+            "Port": 8,
+            "Pin": 15,
+            "Comment": "GPIO 22",
             "MinTemp": 25,
             "MaxTemp": 32,
             "MinHumidity": 10,
