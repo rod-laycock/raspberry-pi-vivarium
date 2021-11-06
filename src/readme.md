@@ -17,6 +17,12 @@ Initialises, reading the config
 Startsup and performs polled monitoring
 Writes to logs / records history of sensors - need to configure a log so it self maintains
 REST - returns JSON
+Runs on localhost:8080
+
+## Website
+Runs on localhost:80
+Connects to localhost:8080 to get sensor data
+
 
 ### Sensors      
 GET: /Sensor 
