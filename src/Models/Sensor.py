@@ -9,10 +9,11 @@
 
 class Sensor():
 
-    def __init__(self, name, port, pin, comment, minTemp, maxTemp, tempUnit):
+    def __init__(self, name, port, pin, sensorType, comment, minTemp, maxTemp, tempUnit):
         self.name = name
         self.port = port
         self.pin = pin
+        self.sensorType = sensorType
         self.comment = comment
         self.minTemp = minTemp
         self.maxTemp = maxTemp
