@@ -2,7 +2,7 @@ from Models.Sensor import Sensor
 import json
 import time
 
-# from Models.SensorReader import SensorReader
+from Models.SensorReader import SensorReader
 
 sensors = {}
 
@@ -22,31 +22,33 @@ sensorCounter = 1
 
 tempUnit = config['TempUnit']
 
-
+# Load the sensors read from config into the sensor dictionary
 for sensor in config['Sensors']:
     port = sensor['Port']
     s = Sensor(sensor['Name'], port, sensor['Pin'], sensor['Comment'], sensor['MinTemp'], sensor['MaxTemp'], tempUnit)
     sensors[str(port)] = s
 
-# sensorReader = SensorReader(config['SensorType'])
+sensorReader = SensorReader(config['SensorType'])
 
-# while True:
-#     for sensor in sensors:
-#         if sensor.
-#     sSensorReader
+while True:
+    for sensorPort in sensors:
+        if sensorPort != None:
+            sensor = sensors[sensorPort]
+            humidity, temperature = sensorReader.Read_Values(sensor)
+            localtime = time.strftime("%d/%m/%Y %I:%M:%S %p", time.localtime())
 
-# 	humidity, temperature = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
-# 	localtime = time.strftime("%d/%m/%Y %I:%M:%S %p", time.localtime())
-
-# 	if humidity is not None and temperature is not None:
-# 		print("{0}: Temp={1:0.1f}*C Hunmidity={2:0.1f}%".format(localtime, temperature, humidity))
-# 	else:
-# 		print("Failed to retreive data from sensor")
-# 	time.sleep(pollFrequency)
+            if humidity is not None and temperature is not None:
+                print("{0}: Temp={1:0.1f}*C Hunmidity={2:0.1f}%".format(localtime, temperature, humidity))
+            else:
+                print("Failed to retreive data from sensor")
+    time.sleep(pollFrequency)
+    print("-----------------------------")
 
 
 
-print(sensors.values())    
+# for s in sensors:
+#     x = sensors[s]   
+#     print(x.name + '|' + str(x.pin) + '|' + str(x.port) + '|' + x.comment )    
 #print("eur: " + str(obj['eur']))
 #print("gbp: " + str(obj['gbp']))
 #s1 = Sensor("Nagini - Hot", 1)
