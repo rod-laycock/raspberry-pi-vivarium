@@ -1,5 +1,5 @@
 {
-    "mode": "dev",
+    "Mode": "dev",
     "PollFrequency": 5,
     "TempUnit": "C",
     "TimeZone": "GMT",

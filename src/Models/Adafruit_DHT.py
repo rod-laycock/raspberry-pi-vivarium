@@ -5,7 +5,7 @@ class Adafruit_DHT():
   DHT11 = 1
   DHT22 = 2
 
-  def read_retry(self, DHT_SENSOR, pin):
+  def read_retry(DHT_SENSOR, pin):
     now = datetime.now()
     
     humidity = now.min

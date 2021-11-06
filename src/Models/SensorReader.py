@@ -1,4 +1,4 @@
-from Adafruit_DHT import Adafruit_DHT
+from Models.Adafruit_DHT import Adafruit_DHT
 
 class SensorReader():
   DHT_SENSOR = Adafruit_DHT.DHT11
@@ -18,7 +18,7 @@ class SensorReader():
       humidity = sensor.pin * 20
       temperature = sensor.port * 20
     else:
-      humidity, temperature = Adafruit_DHT.read_retry(self.DHT_SENSOR, sensor.Get_Pin())
+      humidity, temperature = Adafruit_DHT.read_retry(self.DHT_SENSOR, sensor.pin)
 
     return humidity, temperature
 
