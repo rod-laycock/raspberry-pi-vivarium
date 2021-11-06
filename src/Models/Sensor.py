@@ -5,6 +5,7 @@
 #   Comment - useless crap
 #   MinTemp - minimum temperature this sensor is allowed to get too
 #   MaxTemp - maximum temperature this sensor is allowed to get too 
+#   TempUnit - Should this be in here?
 
 
 class Sensor():
@@ -17,6 +18,6 @@ class Sensor():
         self.comment = comment
         self.minTemp = minTemp
         self.maxTemp = maxTemp
-        self.tempUnit = tempUnit
+        self.tempUnit = tempUnit  #  Do we need this?
     
   
