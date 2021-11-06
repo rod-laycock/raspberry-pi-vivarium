@@ -1,7 +1,7 @@
+from datetime import datetime
 from Models.Sensor import Sensor
 import json
 import time
-
 from Models.SensorReader import SensorReader
 
 sensors = {}
@@ -20,6 +20,9 @@ pollFrequency = config['PollFrequency']
 sensorCounter = 1
 mode = config['Mode']
 tempUnit = config['TempUnit']
+DateTime = config['DateTime']
+DateTime_TimeZone = DateTime['TimeZone']
+DateTime_Format = DateTime['Format']
 
 # Load the sensors read from config into the sensor dictionary
 for sensor in config['Sensors']:
@@ -33,8 +36,8 @@ while True:
     for sensorPort in sensors:
         if sensorPort != None:
             sensor = sensors[sensorPort]
-            humidity, temperature = sensorReader.Read_Values(sensor)
-            localtime = time.strftime("%d/%m/%Y %I:%M:%S %p", time.localtime())
+            dateTime, humidity, temperature = sensorReader.Read_Values(sensor)
+            localtime = time.strftime(DateTime_Format, dateTime)
 
             if humidity is not None and temperature is not None:
                 print("{1}: {0} Temp={2:0.1f}*C Hunmidity={3:0.1f}%".format(sensor.name, localtime, temperature, humidity))

@@ -2,7 +2,10 @@
     "Mode": "dev",
     "PollFrequency": 5,
     "TempUnit": "C",
-    "TimeZone": "GMT",
+    "DateTime": {
+        "TimeZone": "GMT",
+        "Format": "%d/%m/%Y %H:%M:%S"
+    },
     "Sensors": [
         {
             "Name": "Sensor 1",
