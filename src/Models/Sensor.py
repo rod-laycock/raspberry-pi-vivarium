@@ -1,8 +1,11 @@
-from Models.BaseSensor import BaseSensor
-
 # Sensor
-#    Name - so we can see it on screen
-#    Port - Which port on the back of the system is this connected too?
+#   Name - so we can see it on screen
+#   Port - Which port on the back of the system is this connected too?
+#   Pin - So the sensor reader can request values on the pi
+#   Comment - useless crap
+#   MinTemp - minimum temperature this sensor is allowed to get too
+#   MaxTemp - maximum temperature this sensor is allowed to get too 
+
 
 class Sensor():
 
