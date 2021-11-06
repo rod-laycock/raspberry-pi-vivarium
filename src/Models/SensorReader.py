@@ -1,4 +1,6 @@
 from Models.Adafruit_DHT import Adafruit_DHT
+# from Models.History import History
+import time
 
 class SensorReader():
   DHT_SENSOR = Adafruit_DHT.DHT11
@@ -20,5 +22,7 @@ class SensorReader():
     else:
       humidity, temperature = Adafruit_DHT.read_retry(self.DHT_SENSOR, sensor.pin)
 
-    return humidity, temperature
+    # Record this in the history
+
+    return time.localtime(), humidity, temperature
 
