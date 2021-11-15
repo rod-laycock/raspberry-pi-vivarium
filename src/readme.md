@@ -71,9 +71,23 @@ returns all logs from ISO Date (1) time until ISO Date (2)
       
       Get: Sensors
 
+To make a call to a JSON endpoint - dead easy
+
+    import requests
+    
+    request = requests.get(url)
+    json = request.json
+
+    json.get("element")[index].get("element")
 
 
-  Website
+
+Throw exceptions
+
+    raise ValueError("blah")
+
+
+Website
     Configurable - can upload new content / images / etc - write it yourself
     uses AJAX to perform auto updates from the webservice
 
