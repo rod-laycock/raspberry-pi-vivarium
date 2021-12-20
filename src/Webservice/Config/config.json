@@ -3,7 +3,7 @@
     "PollFrequency": 5,
     "TempUnit": "C",
     "DateTime": {
-        "TimeZone": "GMT",
+        "TimeZone": "UTC",
         "Format": "%d/%m/%Y %H:%M:%S"
     },
     "Sensors": [

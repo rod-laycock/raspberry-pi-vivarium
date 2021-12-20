@@ -93,3 +93,21 @@ Website
 
 
 
+# Functionality Require
+The following functionality is required
+1. Read data from a sensor
+2. Extend 1 sensor to multiple sensors
+   1. Ability to move sensors around (the device will have plugs on the back to plug these into), so Sensor 1 may not be in plug 1
+3. Ability to configure it via config file - this means we can amend stuff remotely /  web interface and when rebooting settings perist
+   1. Read / Write to JSON config
+4. Record history
+   1. Need to record the history for X Days - again configurable
+5. Take action
+   1. Sound alarm - if installed
+   2. Send email - if configured
+   3. light / flash LED - if installed
+      1. Change colour of LED
+   4. Display on a screen - if installed
+6. Ability to silence alarms
+7. Ability to suspend alarms for a given time period
+8. 
