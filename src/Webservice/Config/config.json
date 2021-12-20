@@ -6,6 +6,11 @@
         "TimeZone": "UTC",
         "Format": "%d/%m/%Y %H:%M:%S"
     },
+    "Server" : {
+        "Host" : "127.0.0.1",
+        "Port" : 8080,
+        "Debug": "True"
+    },
     "Sensors": [
         {
             "Name": "Sensor 1",
