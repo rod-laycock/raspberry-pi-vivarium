@@ -1,0 +1,24 @@
+{
+    "Mode": "dev",
+    "PollFrequency": 5,
+    "TempUnit": "C",
+    "DateTime": {
+        "TimeZone": "UTC",
+        "Format": "%d/%m/%Y %H:%M:%S"
+    },
+    "Server" : {
+        "Host" : "127.0.0.1",
+        "Port" : 8080,
+        "Debug": "False"
+    },
+    "Sensors": [
+    ],
+    "Logging": {
+        "RetentionPeriodDays": 7,
+        "Location": "~/logs/"
+    },
+    "History": {
+        "RetentionPeriodDays" : 7,
+        "Location": "~/history/"
+    }
+}

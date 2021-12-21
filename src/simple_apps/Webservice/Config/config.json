@@ -1,0 +1,112 @@
+{
+    "Mode": "dev",
+    "PollFrequency": 5,
+    "TempUnit": "C",
+    "DateTime": {
+        "TimeZone": "UTC",
+        "Format": "%d/%m/%Y %H:%M:%S"
+    },
+    "Server" : {
+        "Host" : "127.0.0.1",
+        "Port" : 8081,
+        "Debug": "True"
+    },
+    "Sensors": [
+        {
+            "Name": "Sensor 1",
+            "Port": 1,
+            "Pin": 29,
+            "SensorType": "DHT22",
+            "Comment": "GPIO 5",
+            "MinTemp": 25,
+            "MaxTemp": 32,
+            "MinHumidity": 10,
+            "MaxHumidity": 90
+        },
+        {
+            "Name": "Sensor 2",
+            "Port": 2,
+            "Pin" : 31, 
+            "SensorType": "DHT22",
+            "Comment": "GPIO 6",
+            "MinTemp": 25,
+            "MaxTemp": 32,
+            "MinHumidity": 10,
+            "MaxHumidity": 90
+        },
+        {
+            "Name": "Sensor 3",
+            "Port": 3,
+            "Pin": 37,
+            "SensorType": "DHT22",
+            "Comment": "GPIO 26",
+            "MinTemp": 25,
+            "MaxTemp": 32,
+            "MinHumidity": 10,
+            "MaxHumidity": 90
+        },
+        {
+            "Name": "Sensor 4",
+            "Port": 4,
+            "Pin": 36,
+            "SensorType": "DHT22",
+            "Comment": "GPIO 16", 
+            "MinTemp": 25,
+            "MaxTemp": 32,
+            "MinHumidity": 10,
+            "MaxHumidity": 90
+        },
+        {
+            "Name": "Sensor 5",
+            "Port": 5,
+            "Pin": 22,
+            "SensorType": "DHT22",
+            "Comment": "GPIO 25",
+            "MinTemp": 25,
+            "MaxTemp": 32,
+            "MinHumidity": 10,
+            "MaxHumidity": 90
+        },
+        {
+            "Name": "Sensor 6",
+            "Port": 6,
+            "Pin": 16,
+            "SensorType": "DHT22",
+            "Comment": "GPIO 23",
+            "MinTemp": 25,
+            "MaxTemp": 32,
+            "MinHumidity": 10,
+            "MaxHumidity": 90
+        },
+        {
+            "Name": "Sensor 7",
+            "Port": 7,
+            "Pin": 18,
+            "SensorType": "DHT22",
+            "Comment": "GPIO 24",
+            "MinTemp": 25,
+            "MaxTemp": 32,
+            "MinHumidity": 10,
+            "MaxHumidity": 90
+        },
+        {
+            "Name": "Sensor 8",
+            "Port": 8,
+            "Pin": 15,
+            "SensorType": "DHT22",
+            "Comment": "GPIO 22",
+            "MinTemp": 25,
+            "MaxTemp": 32,
+            "MinHumidity": 10,
+            "MaxHumidity": 90
+        }
+    ],
+    "Logging": {
+        "RetentionPeriodDays": 7,
+        "Location": "~/logs/"
+    },
+    "History": {
+        "RetentionPeriodDays" : 7,
+        "Location": "~/history/"
+    }
+}
