@@ -8,7 +8,7 @@
     },
     "Server" : {
         "Host" : "127.0.0.1",
-        "Port" : 8080,
+        "Port" : 8081,
         "Debug": "True"
     },
     "Sensors": [
