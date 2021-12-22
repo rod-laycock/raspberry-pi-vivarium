@@ -16,6 +16,7 @@ sensors = {}
 # Sensors - Get latest sensor data
 #
 @app.route('/sensors', methods=['GET'])
+@app.route('/sensors/', methods=['GET'])
 def get_sensors():
     return json.dumps(sensors, indent=2, cls=SensorEncoder)
 
