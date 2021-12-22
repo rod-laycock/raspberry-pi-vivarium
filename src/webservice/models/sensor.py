@@ -19,8 +19,10 @@ class Sensor():
         self.comment = comment
         self.minTemp = minTemp
         self.maxTemp = maxTemp
+        self.temp = 0
         self.minHumidity = minHumidity
         self.maxHumidity = maxHumidity
+        self.humidity = 0
 
 # Json Encoder 
 class SensorEncoder(JSONEncoder):
