@@ -37,6 +37,11 @@ The DHT11 is a cheap sensor, but the DHT22 is more precise and will last longer,
 So the first delivery has arrived, and I'm quite impressed with the quality for the price.
 
 ![Raspberry Pi](/images/raspberry_pi.jpg)
+12/01/2022 - So after a rethink - I tried a Pi Pico, but this would need me to code the wifi.
+I then thought about an Pi Zero - but you cannot get hold of them for love nor money.
+Finally I thought about an ESP32 running MicroPython, this has built in wifi, but no real support for screen.
+
+So back to the drawing board.
 
 ![DHT22 Sensors](images/dht_sensors.jpg)
 
