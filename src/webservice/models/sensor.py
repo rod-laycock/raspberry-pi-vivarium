@@ -1,7 +1,6 @@
-import random
 import time
-
 from json import JSONEncoder
+
 from models.Adafruit_DHT import Adafruit_DHT
 
 # Sensor
@@ -10,11 +9,11 @@ from models.Adafruit_DHT import Adafruit_DHT
 #   Pin - So the sensor reader can request values on the pi
 #   Comment - Human readable comment on this.
 #   MinTemp - minimum temperature this sensor is allowed to get too
-#   MaxTemp - maximum temperature this sensor is allowed to get too 
+#   MaxTemp - maximum temperature this sensor is allowed to get too
 #   Temp - this is the recorded temp
 #   MinHumidity - minimum humidity this sensor is allowed to get too
 #   MaxHumidity - maximum humidity this sensor is allowed to get too
-#   Humidity - this is the recorded humidity 
+#   Humidity - this is the recorded humidity
 
 class Sensor():
     def __init__(self, name, port, pin, sensorType, comment, minTemp, maxTemp, minHumidity, maxHumidity):
@@ -32,8 +31,8 @@ class Sensor():
 
 # Json Encoder 
 class SensorEncoder(JSONEncoder):
-        def default(self, s):
-            return s.__dict__
+    def default(self, s):
+        return s.__dict__
 
 # Mechanism to read data back from the sensors
 class SensorReader():

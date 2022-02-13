@@ -2,15 +2,16 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-@app.route('/')
-@app.route('/index')
+
+@app.route("/")
+@app.route("/index")
 def index():
-    name = 'Rosalia'
-    return render_template('index.html', title='Welcome', username=name)
+    name = "Rosalia"
+    return render_template("index.html", title="Welcome", username=name)
+
 
 if __name__ == "__main__":
     app.run()
-
 
 
 # from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -30,7 +31,7 @@ if __name__ == "__main__":
 #         self.wfile.write(bytes("<p>This is an example web server.</p>", "utf-8"))
 #         self.wfile.write(bytes("</body></html>", "utf-8"))
 
-# if __name__ == "__main__":        
+# if __name__ == "__main__":
 #     webServer = HTTPServer((hostName, serverPort), MyServer)
 #     print("Server started http://%s:%s" % (hostName, serverPort))
 

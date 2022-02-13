@@ -1,5 +1,6 @@
 class Error(Exception):
-  pass
+    pass
+
 
 class SensorNotFoundException(Error):
-  pass
+    pass

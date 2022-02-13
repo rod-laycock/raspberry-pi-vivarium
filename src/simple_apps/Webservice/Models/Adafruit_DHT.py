@@ -2,14 +2,15 @@
 from datetime import datetime
 import random
 
-class Adafruit_DHT():
-  DHT11 = 1
-  DHT22 = 2
 
-  # this is a stub which can be used instead of the real Adafruit_DHT.read_retry method. 
-  #    This does not need to have a real sensor attached to it.
-  def read_retry(DHT_SENSOR, pin):
-    humidity = random(1, 100)
-    temperature = random(1, 100)
-    
-    return humidity, temperature
+class Adafruit_DHT:
+    DHT11 = 1
+    DHT22 = 2
+
+    # this is a stub which can be used instead of the real Adafruit_DHT.read_retry method.
+    #    This does not need to have a real sensor attached to it.
+    def read_retry(DHT_SENSOR, pin):
+        humidity = random(1, 100)
+        temperature = random(1, 100)
+
+        return humidity, temperature

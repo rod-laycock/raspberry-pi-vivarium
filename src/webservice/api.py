@@ -3,22 +3,26 @@ import threading
 import time
 
 from distutils.util import strtobool
+from typing import Dict
+
 from flask import Flask
 from flask_restful import Api
 from models.sensor import Sensor, SensorEncoder, SensorReader
+from models.sensor import Sensor
 
 app = Flask(__name__)
 api = Api(app)
 
-sensors = {}
-pollFrequency = 0
-mode = ''
-tempunit = "C"
-datetime_timezone = "UTC"
-datetime_format = "%d/%m/%Y %H:%M:%S"
-server_host = "127.0.0.1"
-server_port = 5000
-server_debug = False
+sensors: Dict[str, Sensor] = {}
+pollFrequency: int = 0
+mode: str = ""
+temp_unit: str  = "C"
+datetime_timezone: str = "UTC"
+datetime_format: str = "%d/%m/%Y %H:%M:%S"
+server_host: str = "127.0.0.1"
+server_port: int = 5000
+server_debug: bool = False
+
 
 class SensorReaderProcess(threading.Thread):
     def __init__(self):
@@ -27,7 +31,7 @@ class SensorReaderProcess(threading.Thread):
     def run(self):
         while True:
             for sensorPort in sensors:
-                if sensorPort != None:
+                if sensorPort:
                     sensor = sensors[sensorPort]
                     humidity = 0
                     temperature = 0
@@ -44,80 +48,87 @@ class SensorReaderProcess(threading.Thread):
 
             time.sleep(poll_frequency)
 
+
 #
 # Sensors - Get latest sensor data
 #
-@app.route('/sensors', methods=['GET'])
-@app.route('/sensors/', methods=['GET'])
+@app.route("/sensors", methods=["GET"], )
 def get_sensors():
     return json.dumps(sensors, indent=2, cls=SensorEncoder)
 
-# TODO: Return data 
-@app.route('/sensors/<int:port>', methods=['GET'])
-def get_sensor_by_id(port):
-    sensor = sensors.get(str(port))
-    return json.dumps(sensor, indent=2, cls=SensorEncoder)
-
+@app.route("/sensors/<int:port>", methods=["GET"])
+def get_sensor_by_id(port: int):
+    return json.dumps(sensors.get(str(port)), indent=2, cls=SensorEncoder)
 
 #
 # Config - Get the current config values, factory default values and any allowable values.
 #
-def read_config(config):
-    with open('config/' + config + '.json', 'r') as configFile:
-        configData = configFile.read()
-    
-    config = json.loads(configData)
-    
-    return config
+def read_config(config: str):
+    with open("config/" + config + ".json", "r") as config_file:
+        return json.loads(config_file.read())
 
-@app.route('/config/current', methods=['GET'])
+@app.route("/config/current", methods=["GET"])
+@app.route("/config", methods=["GET"])
 def get_current_config():
-    return read_config('config')
+    return read_config("config")
 
-@app.route('/config/factory', methods=['GET'])
+
+@app.route("/config/factory", methods=["GET"])
 def get_factory_config():
-    return read_config('factory')
+    return read_config("factory")
 
-@app.route('/config/values', methods=['GET'])
+
+@app.route("/config/values", methods=["GET"])
 def get_config_values():
-    return read_config('defaults')
+    return read_config("defaults")
 
-if __name__ == 'api':
+
+if __name__ == "__main__":
+
     # Read the configuration file
-    with open('config/config.json', 'r') as configFile:
+    with open("config/config.json", "r") as configFile:
         configData = configFile.read()
-   
+
     config = json.loads(configData)
 
-    if (config != None):
-        if ('Server' in config):
-            if ('Host' in config['Server']):
-                server_host = config['Server']['Host']
+    if config:
+        if "Server" in config:
+            if "Host" in config["Server"]:
+                server_host = config["Server"]["Host"]
 
-            if ('Port' in config['Server']):
-                server_port = config['Server']['Port']
-            
-            if ('Debug' in config['Server']):
-                server_debug = bool(strtobool(config['Server']['Debug']))
-        
-        poll_frequency = config['PollFrequency']
-        mode = config['Mode']
-        temp_unit = str(config['TempUnit'])
-        datetime = config['DateTime']
-        datetime_timezone = datetime['TimeZone']
-        datetime_format = datetime['Format']
+            if "Port" in config["Server"]:
+                server_port = config["Server"]["Port"]
 
-        if ('Sensors' in config):
-            for sensor in config['Sensors']:
-                port = sensor['Port']
-                sensorObj = Sensor(sensor['Name'], port, sensor['Pin'], sensor['SensorType'], sensor['Comment'], sensor['MinTemp'], sensor['MaxTemp'], sensor['MinHumidity'], sensor['MaxHumidity'])
+            if "Debug" in config["Server"]:
+                server_debug = bool(strtobool(config["Server"]["Debug"]))
+
+        poll_frequency = config["PollFrequency"]
+        mode = config["Mode"]
+        temp_unit = str(config["TempUnit"])
+        datetime = config["DateTime"]
+        datetime_timezone = datetime["TimeZone"]
+        datetime_format = datetime["Format"]
+
+        if "Sensors" in config:
+            for sensor in config["Sensors"]:
+                port = sensor["Port"]
+                sensorObj = Sensor(
+                    sensor["Name"],
+                    port,
+                    sensor["Pin"],
+                    sensor["SensorType"],
+                    sensor["Comment"],
+                    sensor["MinTemp"],
+                    sensor["MaxTemp"],
+                    sensor["MinHumidity"],
+                    sensor["MaxHumidity"],
+                )
                 sensors[str(port)] = sensorObj
-        
+
     sensorReaderWorkerThread = SensorReaderProcess()
     sensorReaderWorkerThread.start()
 
-      #   worker = Worker(sensors, DateTime_Format, pollFrequency) 
-      #   worker.start()
+    #   worker = Worker(sensors, DateTime_Format, pollFrequency)
+    #   worker.start()
 
-if __name__ == '__main__':
-    app.run(debug=bool(server_debug), host = server_host, port = server_port)
+    app.run(debug=bool(server_debug), host=server_host, port=server_port)
