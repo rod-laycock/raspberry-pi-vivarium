@@ -1,0 +1,290 @@
+{
+	"info": {
+		"_postman_id": "861312f1-42c1-4faa-911d-07cc54fadfee",
+		"name": "Vivarium Monitoring",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14211023"
+	},
+	"item": [
+		{
+			"name": "Config - Get Current",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/html",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://{{viv_host}}:{{viv_port}}/api/v1/config",
+					"protocol": "http",
+					"host": [
+						"{{viv_host}}"
+					],
+					"port": "{{viv_port}}",
+					"path": [
+						"api",
+						"v1",
+						"config"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Config - Get Factory Default",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/html",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://{{viv_host}}:{{viv_port}}/api/v1/config/factory",
+					"protocol": "http",
+					"host": [
+						"{{viv_host}}"
+					],
+					"port": "{{viv_port}}",
+					"path": [
+						"api",
+						"v1",
+						"config",
+						"factory"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Config - Get Defaults",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/html",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://{{viv_host}}:{{viv_port}}/api/v1/config/values",
+					"protocol": "http",
+					"host": [
+						"{{viv_host}}"
+					],
+					"port": "{{viv_port}}",
+					"path": [
+						"api",
+						"v1",
+						"config",
+						"values"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sensor - Get All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/html",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://{{viv_host}}:{{viv_port}}/api/v1/sensors",
+					"protocol": "http",
+					"host": [
+						"{{viv_host}}"
+					],
+					"port": "{{viv_port}}",
+					"path": [
+						"api",
+						"v1",
+						"sensors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sensor - Get By Id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/html",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://{{viv_host}}:{{viv_port}}/api/v1/sensors/1",
+					"protocol": "http",
+					"host": [
+						"{{viv_host}}"
+					],
+					"port": "{{viv_port}}",
+					"path": [
+						"api",
+						"v1",
+						"sensors",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sensor - Get All Data",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/html",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://{{viv_host}}:{{viv_port}}/api/v1/sensors/data",
+					"protocol": "http",
+					"host": [
+						"{{viv_host}}"
+					],
+					"port": "{{viv_port}}",
+					"path": [
+						"api",
+						"v1",
+						"sensors",
+						"data"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sensor - Get Data By Id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/html",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://{{viv_host}}:{{viv_port}}/api/v1/sensors/data/1",
+					"protocol": "http",
+					"host": [
+						"{{viv_host}}"
+					],
+					"port": "{{viv_port}}",
+					"path": [
+						"api",
+						"v1",
+						"sensors",
+						"data",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Swagger",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "text/html",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://{{viv_host}}:{{viv_port}}/api/v1/docs",
+					"protocol": "http",
+					"host": [
+						"{{viv_host}}"
+					],
+					"port": "{{viv_port}}",
+					"path": [
+						"api",
+						"v1",
+						"docs"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "viv_port",
+			"value": "5002"
+		},
+		{
+			"key": "viv_host",
+			"value": "127.0.0.1"
+		}
+	]
+}
