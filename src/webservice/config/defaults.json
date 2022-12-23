@@ -1,7 +1,7 @@
 {
   "TempUnits": {
-    "Degrees Celcius": "C",
-    "Degrees Farenheit" : "F"
+    "Degrees Celsius": "C",
+    "Degrees Fahrenheit" : "F"
   },
   "TimeZones": {
     "UTC": "UTC"

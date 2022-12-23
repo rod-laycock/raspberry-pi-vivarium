@@ -119,54 +119,33 @@ def get_sensors():
         ---
         tags:
           - Sensors
-        definitions:
-          - schema:
-              id: Group
-              properties:
-                name:
-                 type: string
-                 description: the group's name
-        parameters:
-          - in: body
-            name: body
-            schema:
-              id: User
-              required:
-                - email
-                - name
-              properties:
-                email:
-                  type: string
-                  description: email for user
-                name:
-                  type: string
-                  description: name for user
-                address:
-                  description: address for user
-                  schema:
-                    id: Address
-                    properties:
-                      street:
-                        type: string
-                      state:
-                        type: string
-                      country:
-                        type: string
-                      postalcode:
-                        type: string
-                groups:
-                  type: array
-                  description: list of groups
-                  items:
-                    $ref: "#/definitions/Group"
+        
         responses:
           200:
-            description: Sensors data returned
+            description: Sensors data returned.
+          400:
+            description: Invalid data format requested.
+          404:
+            description: No sensors configured in the config/config.json file.
         """
     return format_response(request, sensors)
 
 @app.route(API_ROOT + "/sensors/<int:port>", methods=["GET"])
 def get_sensor_by_id(port: int):
+    """
+        Gets sensors configuration and current data of a specific sensor by port number
+        ---
+        tags:
+          - Sensors
+        
+        responses:
+          200:
+            description: Sensor data returned.
+          400:
+            description: Invalid data format requested.
+          404:
+            description: No sensors configured in the config/config.json file.
+    """
     return format_response(request, sensors.get(str(port)))
 
 #
@@ -174,6 +153,20 @@ def get_sensor_by_id(port: int):
 #
 @app.route(API_ROOT + "/sensors/data", methods=["GET"], )
 def get_sensors_data():
+    """
+        Gets just the sensor data for all sensors
+        ---
+        tags:
+          - Sensors
+        
+        responses:
+          200:
+            description: Sensor data returned.
+          400:
+            description: Invalid data format requested.
+          404:
+            description: No sensors configured in the config/config.json file.
+    """
     output_sensors = []
     for sensor in sensors:
         output_sensor = {}
@@ -188,6 +181,20 @@ def get_sensors_data():
 
 @app.route(API_ROOT + "/sensors/data/<int:port>", methods=["GET"])
 def get_sensor_data_by_id(port: int):
+    """
+        Gets just the sensor data for the sensor specified by the port
+        ---
+        tags:
+          - Sensors
+        
+        responses:
+          200:
+            description: Sensor data returned.
+          400:
+            description: Invalid data format requested.
+          404:
+            description: No sensors configured in the config/config.json file.
+    """    
     sensor = sensors.get(str(port))
     output_sensor = {}
     output_sensor["name"] = sensor.name
@@ -206,17 +213,59 @@ def read_config(config: str):
 @app.route(API_ROOT + "/config/current", methods=["GET"])
 @app.route(API_ROOT + "/config", methods=["GET"])
 def get_current_config():
+    """
+        Gets just the current configuration for the application
+        ---
+        tags:
+          - Config
+        
+        responses:
+          200:
+            description: Config data returned.
+          400:
+            description: Invalid data format requested.
+          404:
+            description: Invalid config in the config/config.json file.
+    """
     config = read_config("config")
     return format_response(request, config)
 
 
 @app.route(API_ROOT + "/config/factory", methods=["GET"])
 def get_factory_config():
+    """
+        Gets just the factory default configuration for the application
+        ---
+        tags:
+          - Config
+        
+        responses:
+          200:
+            description: Config data returned.
+          400:
+            description: Invalid data format requested.
+          404:
+            description: Invalid config in the config/config.json file.
+    """
     return read_config("factory")
 
 
 @app.route(API_ROOT + "/config/values", methods=["GET"])
 def get_config_values():
+    """
+        Gets default values which can be used when setting the config.json
+        ---
+        tags:
+          - Config
+        
+        responses:
+          200:
+            description: Config defaults data returned.
+          400:
+            description: Invalid data format requested.
+          404:
+            description: Invalid config in the config/config.json file.
+    """    
     return read_config("defaults")
 
 

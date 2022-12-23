@@ -133,3 +133,13 @@ Here are some stores to buy essentials from:
 
 [Probe sensor data comparison](https://kandrsmith.org/RJS/Misc/Hygrometers/calib_many.html) - note DHT22 is VERY similar to the AM2320, although the AM2320 is less accurate (2 - 3 deg C out and 5%-10% humidity out) - Also of interest is the fact that some of these devices can pull realtime data but their accuracy decreases over say 1s polling. For our requirements, 60s polling would be more than adequate, but if we perform 60 samples and then average it, this would be adequate as temp may drop if door is opened.
 
+# Code
+Install flask, flask_restful and json2html using
+
+pip3 install flask
+pip3 install flask_restful
+pip3 install json2html
+
+# API
+
+Swagger used with Swagger docs https://github.com/OAI/OpenAPI-Specification/blob/main/versions/2.0.md#operation-object
