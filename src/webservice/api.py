@@ -5,7 +5,9 @@ import time
 from distutils.util import strtobool
 from typing import Dict
 
-from flask import Flask, request
+from flask import Flask, request, Response, jsonify
+from flask_swagger import swagger
+from flask_swagger_ui import get_swaggerui_blueprint
 from flask_restful import Api
 from json2html import *
 from models.sensor import Sensor, SensorEncoder, SensorReader
@@ -14,6 +16,13 @@ from models.sensor import Sensor
 
 app = Flask(__name__)
 api = Api(app)
+
+API_DIRECTORY = '/api'
+API_VERSION = '/v1'
+API_ROOT = API_DIRECTORY + API_VERSION
+
+SWAGGER_URL = API_ROOT + '/docs'  # URL for exposing Swagger UI (without trailing '/')
+API_URL = API_ROOT + '/swagger'  # Our API url (can of course be a local resource)
 
 sensors: Dict[str, Sensor] = {}
 pollFrequency: int = 0
@@ -50,41 +59,120 @@ class SensorReaderProcess(threading.Thread):
 
             time.sleep(poll_frequency)
 
+#
+# Common routines to help with all the API requests
+#
 def get_format(request):
-    format = request.args.get('format')
+    format = request.mimetype
     if (format):
-        format = str.lower(format)
-        return format
-    return "json"
+         format = str.lower(format)
+         return format
+    
+    return "application/json"
 
-def format_response(request, data):
+def format_response(request, req_data):
     format = get_format(request)
-    json_data = json.dumps(data, indent=2, cls=SensorEncoder)
 
-    if (format):
-        if (str.lower(format) == "html"):
-            return json2html.convert(json = json_data, table_attributes="id=\"info-table\" class=\"table table-bordered table-hover\"")        
-    return json_data
+    if (req_data is None):
+        return Response("No data found", status=404, content_type=get_format(request))
 
+    res_data = json.dumps(req_data, indent=2, separators=(',', ':'), cls=SensorEncoder, sort_keys=0)
+
+    if (format is None):
+        return "Unknown format requested", 400
+    else:
+        if (format == "text/html"):
+            res_data = json2html.convert(json = res_data, table_attributes="id=\"info-table\" class=\"table table-bordered table-hover\"")
+        elif (format == "application/json"):
+            pass
+        else:
+            return "Invalid format requested", 400
+
+    return Response(res_data, status=200, content_type=get_format(request))
+
+#
+# Routing
+#
 @app.route("/", methods=["GET"], )
 def get_home():
-    return "Python monitoring pythons is up and running."
+
+    swagger_url = request.host_url + SWAGGER_URL
+
+    return Response("Vivarium Monitoring Application up and running - please see <a href=\"" + swagger_url + "\">" + swagger_url + "</a> for how tro use the API.", status=200, mimetype="text/html")
+
+@app.route(API_ROOT + "/swagger", methods=["GET"], )
+def get_swagger_json():
+    swag = swagger(app)
+    swag['info']['version'] = "1.0"
+    swag['info']['title'] = "Vivarium monitoring station"
+
+    return jsonify(swag)
+
 
 #
 # Sensors - Get latest sensor data and configuration
 #
-@app.route("/sensors", methods=["GET"], )
+@app.route(API_ROOT + "/sensors", methods=["GET"], )
 def get_sensors():
+    """
+        List all sensors configuration and current data
+        ---
+        tags:
+          - Sensors
+        definitions:
+          - schema:
+              id: Group
+              properties:
+                name:
+                 type: string
+                 description: the group's name
+        parameters:
+          - in: body
+            name: body
+            schema:
+              id: User
+              required:
+                - email
+                - name
+              properties:
+                email:
+                  type: string
+                  description: email for user
+                name:
+                  type: string
+                  description: name for user
+                address:
+                  description: address for user
+                  schema:
+                    id: Address
+                    properties:
+                      street:
+                        type: string
+                      state:
+                        type: string
+                      country:
+                        type: string
+                      postalcode:
+                        type: string
+                groups:
+                  type: array
+                  description: list of groups
+                  items:
+                    $ref: "#/definitions/Group"
+        responses:
+          200:
+            description: Sensors data returned
+        """
     return format_response(request, sensors)
 
-@app.route("/sensors/<int:port>", methods=["GET"])
+@app.route(API_ROOT + "/sensors/<int:port>", methods=["GET"])
 def get_sensor_by_id(port: int):
     return format_response(request, sensors.get(str(port)))
 
 #
 # Sensors - Get latest sensor data only
 #
-@app.route("/sensors/data", methods=["GET"], )
+@app.route(API_ROOT + "/sensors/data", methods=["GET"], )
 def get_sensors_data():
     output_sensors = []
     for sensor in sensors:
@@ -98,16 +186,15 @@ def get_sensors_data():
     # return json2html.convert(json = , table_attributes="id=\"info-table\" class=\"table table-bordered table-hover\"")
     return "..."
 
-@app.route("/sensors/data/<int:port>", methods=["GET"])
+@app.route(API_ROOT + "/sensors/data/<int:port>", methods=["GET"])
 def get_sensor_data_by_id(port: int):
     sensor = sensors.get(str(port))
     output_sensor = {}
     output_sensor["name"] = sensor.name
     output_sensor["temperature"] = sensor.temperature
     output_sensor["humidity"] = sensor.humidity
-    return format_response(request, output_sensor)
     
-
+    return format_response(request, output_sensor)
 
 #
 # Config - Get the current config values, factory default values and any allowable values.
@@ -116,23 +203,44 @@ def read_config(config: str):
     with open("/home/rod/Projects/Code/raspberry-pi-vivarium/src/webservice/config/" + config + ".json", "r") as config_file:
         return json.loads(config_file.read())
 
-@app.route("/config/current", methods=["GET"])
-@app.route("/config", methods=["GET"])
+@app.route(API_ROOT + "/config/current", methods=["GET"])
+@app.route(API_ROOT + "/config", methods=["GET"])
 def get_current_config():
-    return read_config("config")
+    config = read_config("config")
+    return format_response(request, config)
 
 
-@app.route("/config/factory", methods=["GET"])
+@app.route(API_ROOT + "/config/factory", methods=["GET"])
 def get_factory_config():
     return read_config("factory")
 
 
-@app.route("/config/values", methods=["GET"])
+@app.route(API_ROOT + "/config/values", methods=["GET"])
 def get_config_values():
     return read_config("defaults")
 
 
 if __name__ == "__main__":
+
+    # Call factory function to create our blueprint
+    swaggerui_blueprint = get_swaggerui_blueprint(
+        SWAGGER_URL,  # Swagger UI static files will be mapped to '{SWAGGER_URL}/dist/'
+        API_URL,
+        config={  # Swagger UI config overrides
+            'app_name': "Vivarium Monitoring Application"
+
+        },
+        # oauth_config={  # OAuth config. See https://github.com/swagger-api/swagger-ui#oauth2-configuration .
+        #    'clientId': "your-client-id",
+        #    'clientSecret': "your-client-secret-if-required",
+        #    'realm': "your-realms",
+        #    'appName': "your-app-name",
+        #    'scopeSeparator': " ",
+        #    'additionalQueryStringParams': {'test': "hello"}
+        # }
+    )
+    
+    app.register_blueprint(swaggerui_blueprint)
 
     # Read the configuration file
     with open("/home/rod/Projects/Code/raspberry-pi-vivarium/src/webservice/config/config.json", "r") as configFile:
