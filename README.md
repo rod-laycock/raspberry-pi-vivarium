@@ -46,7 +46,7 @@ So back to the drawing board.
 ## 23/12/2022
 After various other projects (and a wait to see if I can get hold of a Pi Zero W/WH), I have picked this back up and decided to stick with an old Raspberry 3B+ which I had lying around - I will look to replace this with a more efficient Pi Zero W once they become available.
 
-![Raspberry Pi 3B+](/images/raspberry_pi_B.resized.jpg)
+![Raspberry Pi 3B+](/images/raspberry_pi_B.jpg)
 
 # Equipment
 So the first delivery has arrived, and I'm quite impressed with the quality for the price.
