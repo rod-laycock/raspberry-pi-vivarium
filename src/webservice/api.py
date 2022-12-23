@@ -51,16 +51,20 @@ class SensorReaderProcess(threading.Thread):
             time.sleep(poll_frequency)
 
 def get_format(request):
-    format = str.lower(request.args.get('format'))
+    format = request.args.get('format')
     if (format):
+        format = str.lower(format)
         return format
     return "json"
 
 def format_response(request, data):
     format = get_format(request)
-    if (str.lower(format) == "html"):
-        return json2html.convert(json = data, table_attributes="id=\"info-table\" class=\"table table-bordered table-hover\"")        
-    return data
+    json_data = json.dumps(data, indent=2, cls=SensorEncoder)
+
+    if (format):
+        if (str.lower(format) == "html"):
+            return json2html.convert(json = json_data, table_attributes="id=\"info-table\" class=\"table table-bordered table-hover\"")        
+    return json_data
 
 @app.route("/", methods=["GET"], )
 def get_home():
@@ -71,13 +75,38 @@ def get_home():
 #
 @app.route("/sensors", methods=["GET"], )
 def get_sensors():
-    data = json.dumps(sensors, indent=2, cls=SensorEncoder)
-    return format_response(request, data)
+    return format_response(request, sensors)
 
 @app.route("/sensors/<int:port>", methods=["GET"])
 def get_sensor_by_id(port: int):
-    data = json.dumps(sensors.get(str(port)), indent=2, cls=SensorEncoder)
-    return format_response(request, data)
+    return format_response(request, sensors.get(str(port)))
+
+#
+# Sensors - Get latest sensor data only
+#
+@app.route("/sensors/data", methods=["GET"], )
+def get_sensors_data():
+    output_sensors = []
+    for sensor in sensors:
+        output_sensor = {}
+        output_sensor["name"] = sensors[sensor].name
+        output_sensor["temperature"] = sensors[sensor].temperature
+        output_sensor["humidity"] = sensors[sensor].humidity
+        output_sensors.append(output_sensor)
+    return format_response(request, output_sensors)
+
+    # return json2html.convert(json = , table_attributes="id=\"info-table\" class=\"table table-bordered table-hover\"")
+    return "..."
+
+@app.route("/sensors/data/<int:port>", methods=["GET"])
+def get_sensor_data_by_id(port: int):
+    sensor = sensors.get(str(port))
+    output_sensor = {}
+    output_sensor["name"] = sensor.name
+    output_sensor["temperature"] = sensor.temperature
+    output_sensor["humidity"] = sensor.humidity
+    return format_response(request, output_sensor)
+    
 
 
 #
