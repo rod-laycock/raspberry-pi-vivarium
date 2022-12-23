@@ -35,15 +35,21 @@ Depending on how many vivarium's you want to monitor will denote the type of Ras
 
 The DHT11 is a cheap sensor, but the DHT22 is more precise and will last longer, your call which one to opt for, there are others available and I found a quick [comparison site](https://kandrsmith.org/RJS/Misc/Hygrometers/calib_many.html) on other alternatives (warning - this site contains electronic tech speak).
 
-# Equipment
-So the first delivery has arrived, and I'm quite impressed with the quality for the price.
-
-![Raspberry Pi](/images/raspberry_pi.jpg)
-12/01/2022 - So after a rethink - I tried a Pi Pico, but this would need me to code the wi-fi.
+# History
+## 12/01/2022
+So after a rethink - I tried a Pi Pico, but this would need me to code the wi-fi.
 I then thought about an Pi Zero - but you cannot get hold of them for love nor money.
 Finally I thought about an ESP32 running MicroPython, this has built in wi-fi, but no real support for screen.
 
 So back to the drawing board.
+
+## 23/12/2022
+After various other projects (and a wait to see if I can get hold of a Pi Zero W/WH), I have picked this back up and decided to stick with an old Raspberry 3B+ which I had lying around - I will look to replace this with a more efficient Pi Zero W once they become available.
+
+![Raspberry Pi 3B+](/images/raspberry_pi_B.resized.jpg)
+
+# Equipment
+So the first delivery has arrived, and I'm quite impressed with the quality for the price.
 
 ![DHT22 Sensors](images/dht_sensors.jpg)
 
