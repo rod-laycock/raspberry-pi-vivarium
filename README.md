@@ -1,12 +1,14 @@
 # Raspberry Pi Vivarium Monitor / Controller
 Raspberry Pi Vivarium monitoring / control project.
 
+color 
+
 ## Introduction.
-I have 4 ball pythons and need to ensure the temperature and humidity are always at the right levels.  So this project is starting life as a sumple temperature/humidity sensor & recorder with web access, but over time could build up to include web-cams, temperature controller, over / under temperature alarms, door open sensors, you get the jist.
+I have 4 ball pythons and need to ensure the temperature and humidity are always at the right levels.  So this project is starting life as a simple temperature/humidity sensor & recorder with web access, but over time could build up to include web-cams, temperature controller, over / under temperature alarms, door open sensors, you get the jist.
 
 
 ### A quick introduction to Pythons
-Pythons (Python regius) are cold blooded reptiles originating from central Africa, which live in a vivarium (as it's normally too cold for in the UK) with a heater on one side (known as the warm side) and hides on both the warm and opposite side (the cool side). This warm / cold side provides a gradiated temperature shift between so allowing the snake to move freely between in order to regulate it's own temperature - Sir David Attenborough would be proud!
+Pythons (Python Regius) are cold blooded reptiles originating from central Africa, which live in a vivarium (as it's normally too cold for in the UK) with a heater on one side (known as the warm side) and hides on both the warm and opposite side (the cool side). This warm / cold side provides a gradient temperature shift between so allowing the snake to move freely between in order to regulate it's own temperature - Sir David Attenborough would be proud!
 
 Snakes don't have eyelid, so need moisture in the air to protect their eyes, and keep them hydrated, at around 50% - 60% moisture content.
 
@@ -29,7 +31,7 @@ To make things more permanent:
 - soldering iron
 - heat shrink
 
-Depending on how many vivariums you want to monitor will denote the type of Raspberry Pi you'll need, I'm going for a Raspberry Pi 4, because I have a couple spare.
+Depending on how many vivarium's you want to monitor will denote the type of Raspberry Pi you'll need, I'm going for a Raspberry Pi 4, because I have a couple spare.
 
 The DHT11 is a cheap sensor, but the DHT22 is more precise and will last longer, your call which one to opt for, there are others available and I found a quick [comparison site](https://kandrsmith.org/RJS/Misc/Hygrometers/calib_many.html) on other alternatives (warning - this site contains electronic tech speak).
 
@@ -37,9 +39,9 @@ The DHT11 is a cheap sensor, but the DHT22 is more precise and will last longer,
 So the first delivery has arrived, and I'm quite impressed with the quality for the price.
 
 ![Raspberry Pi](/images/raspberry_pi.jpg)
-12/01/2022 - So after a rethink - I tried a Pi Pico, but this would need me to code the wifi.
+12/01/2022 - So after a rethink - I tried a Pi Pico, but this would need me to code the wi-fi.
 I then thought about an Pi Zero - but you cannot get hold of them for love nor money.
-Finally I thought about an ESP32 running MicroPython, this has built in wifi, but no real support for screen.
+Finally I thought about an ESP32 running MicroPython, this has built in wi-fi, but no real support for screen.
 
 So back to the drawing board.
 
@@ -47,7 +49,7 @@ So back to the drawing board.
 
 ![Crimp Kit](/images/crimping_kit_outside.jpg)
 ![Crimp Kit](/images/crimping_kit_inside.jpg)
-![Breadboad & Resistors](/images/resistors_breadbord.jpg)
+![Breadboard & Resistors](/images/resistors_breadbord.jpg)
 
 So before we go and start hooking all of this together, let's just explore the temp sensor.
 
@@ -69,7 +71,7 @@ Download and install selected OS of choice - I downloaded Ubuntu Server.
 
 Login using ubuntu / ubuntu and change the password.
 
-By default ubuntu server is not connected to Wifi, it should be using ethernet, but that's so old hat ;)
+By default ubuntu server is not connected to wi-fi, it should be using ethernet, but that's so old hat ;)
 
 To find out the name of your wireless device, issue the command:
 
@@ -123,5 +125,5 @@ Here are some stores to buy essentials from:
 
 # Technical Resources and other stuff
 
-[Probe semsor data comparison](https://kandrsmith.org/RJS/Misc/Hygrometers/calib_many.html) - note DHT22 is VERY similar to the AM2320, although the AM2320 is less accurate (2 - 3 deg C out and 5%-10% humidity out) - Also of interest is the fact that some of these devices can pull realtime data but their accuracy decreases over say 1s polling. For our requirements, 60s polling would be more than adequate, but if we perform 60 samples and then average it, this would be adequate as temp may drop if door is opened.
+[Probe sensor data comparison](https://kandrsmith.org/RJS/Misc/Hygrometers/calib_many.html) - note DHT22 is VERY similar to the AM2320, although the AM2320 is less accurate (2 - 3 deg C out and 5%-10% humidity out) - Also of interest is the fact that some of these devices can pull realtime data but their accuracy decreases over say 1s polling. For our requirements, 60s polling would be more than adequate, but if we perform 60 samples and then average it, this would be adequate as temp may drop if door is opened.
 
