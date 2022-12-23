@@ -5,10 +5,12 @@ import time
 from distutils.util import strtobool
 from typing import Dict
 
-from flask import Flask
+from flask import Flask, request
 from flask_restful import Api
+from json2html import *
 from models.sensor import Sensor, SensorEncoder, SensorReader
 from models.sensor import Sensor
+
 
 app = Flask(__name__)
 api = Api(app)
@@ -48,23 +50,41 @@ class SensorReaderProcess(threading.Thread):
 
             time.sleep(poll_frequency)
 
+def get_format(request):
+    format = str.lower(request.args.get('format'))
+    if (format):
+        return format
+    return "json"
+
+def format_response(request, data):
+    format = get_format(request)
+    if (str.lower(format) == "html"):
+        return json2html.convert(json = data, table_attributes="id=\"info-table\" class=\"table table-bordered table-hover\"")        
+    return data
+
+@app.route("/", methods=["GET"], )
+def get_home():
+    return "Python monitoring pythons is up and running."
 
 #
-# Sensors - Get latest sensor data
+# Sensors - Get latest sensor data and configuration
 #
 @app.route("/sensors", methods=["GET"], )
 def get_sensors():
-    return json.dumps(sensors, indent=2, cls=SensorEncoder)
+    data = json.dumps(sensors, indent=2, cls=SensorEncoder)
+    return format_response(request, data)
 
 @app.route("/sensors/<int:port>", methods=["GET"])
 def get_sensor_by_id(port: int):
-    return json.dumps(sensors.get(str(port)), indent=2, cls=SensorEncoder)
+    data = json.dumps(sensors.get(str(port)), indent=2, cls=SensorEncoder)
+    return format_response(request, data)
+
 
 #
 # Config - Get the current config values, factory default values and any allowable values.
 #
 def read_config(config: str):
-    with open("config/" + config + ".json", "r") as config_file:
+    with open("/home/rod/Projects/Code/raspberry-pi-vivarium/src/webservice/config/" + config + ".json", "r") as config_file:
         return json.loads(config_file.read())
 
 @app.route("/config/current", methods=["GET"])
@@ -86,7 +106,7 @@ def get_config_values():
 if __name__ == "__main__":
 
     # Read the configuration file
-    with open("config/config.json", "r") as configFile:
+    with open("/home/rod/Projects/Code/raspberry-pi-vivarium/src/webservice/config/config.json", "r") as configFile:
         configData = configFile.read()
 
     config = json.loads(configData)
