@@ -1,28 +1,31 @@
+#region Imports
 import json
 import threading
 import time
 
-from distutils.util import strtobool
-from typing import Dict
-
+#from setuptools import strtobool
+#from distutils.util import strtobool
 from flask import Flask, request, Response, jsonify
 from flask_swagger import swagger
 from flask_swagger_ui import get_swaggerui_blueprint
 from flask_restful import Api
 from json2html import *
 from models.sensor import Sensor, SensorEncoder, SensorReader
-from models.sensor import Sensor
+from python_json_config import ConfigBuilder
+from typing import Dict
 
+#endregion
 
-app = Flask(__name__)
-api = Api(app)
+#region Constants and Variables
 
 API_DIRECTORY = '/api'
 API_VERSION = '/v1'
 API_ROOT = API_DIRECTORY + API_VERSION
-
 SWAGGER_URL = API_ROOT + '/docs'  # URL for exposing Swagger UI (without trailing '/')
 API_URL = API_ROOT + '/swagger'  # Our API url (can of course be a local resource)
+
+app = Flask(__name__)
+api = Api(app)
 
 sensors: Dict[str, Sensor] = {}
 pollFrequency: int = 0
@@ -34,6 +37,9 @@ server_host: str = "127.0.0.1"
 server_port: int = 5000
 server_debug: bool = False
 
+#endregion
+
+#region Classes
 
 class SensorReaderProcess(threading.Thread):
     def __init__(self):
@@ -59,9 +65,10 @@ class SensorReaderProcess(threading.Thread):
 
             time.sleep(poll_frequency)
 
-#
-# Common routines to help with all the API requests
-#
+#endregion
+
+#region Common routines to help with all the API requests
+
 def get_format(request):
     format = request.mimetype
     if (format):
@@ -90,9 +97,21 @@ def format_response(request, req_data):
 
     return Response(res_data, status=200, content_type=get_format(request))
 
+#endregion
+
+#region Configuration
+
 #
-# Routing
+# Config - Get the current config values, factory default values and any allowable values.
 #
+def read_config(config: str):
+    with open("/home/rod/Projects/Code/raspberry-pi-vivarium/src/webservice/config/" + config + ".json", "r") as config_file:
+        return json.loads(config_file.read())
+
+#endregion
+
+#region Routing
+
 @app.route("/", methods=["GET"], )
 def get_home():
 
@@ -204,12 +223,8 @@ def get_sensor_data_by_id(port: int):
     return format_response(request, output_sensor)
 
 #
-# Config - Get the current config values, factory default values and any allowable values.
+# Configuration
 #
-def read_config(config: str):
-    with open("/home/rod/Projects/Code/raspberry-pi-vivarium/src/webservice/config/" + config + ".json", "r") as config_file:
-        return json.loads(config_file.read())
-
 @app.route(API_ROOT + "/config/current", methods=["GET"])
 @app.route(API_ROOT + "/config", methods=["GET"])
 def get_current_config():
@@ -268,9 +283,11 @@ def get_config_values():
     """    
     return read_config("defaults")
 
+#endregion
 
 if __name__ == "__main__":
 
+    # Register the Swagger blueprint
     # Call factory function to create our blueprint
     swaggerui_blueprint = get_swaggerui_blueprint(
         SWAGGER_URL,  # Swagger UI static files will be mapped to '{SWAGGER_URL}/dist/'
@@ -288,48 +305,73 @@ if __name__ == "__main__":
         #    'additionalQueryStringParams': {'test': "hello"}
         # }
     )
-    
     app.register_blueprint(swaggerui_blueprint)
-
+    
     # Read the configuration file
-    with open("/home/rod/Projects/Code/raspberry-pi-vivarium/src/webservice/config/config.json", "r") as configFile:
-        configData = configFile.read()
+    # create config parser
+    builder = ConfigBuilder()
 
-    config = json.loads(configData)
+    # parse config
+    config = builder.parse_config("/home/rod/Projects/Code/raspberry-pi-vivarium/src/webservice/config/config.json")
 
-    if config:
-        if "Server" in config:
-            if "Host" in config["Server"]:
-                server_host = config["Server"]["Host"]
+    # access elements
+    server_host = config.Server.Host
+    server_port = config.Server.Port
+    server_debug = config.Server.Debug
 
-            if "Port" in config["Server"]:
-                server_port = config["Server"]["Port"]
+    for sensor in config.Sensors:
+        port = sensor["Port"]
+        sensorObj = Sensor(
+            sensor["Name"],
+            port,
+            sensor["Pin"],
+            sensor["SensorType"],
+            sensor["Comment"],
+            sensor["MinTemp"],
+            sensor["MaxTemp"],
+            sensor["MinHumidity"],
+            sensor["MaxHumidity"],
+        )
+        sensors[str(port)] = sensorObj
 
-            if "Debug" in config["Server"]:
-                server_debug = bool(strtobool(config["Server"]["Debug"]))
+    # with open("/home/rod/Projects/Code/raspberry-pi-vivarium/src/webservice/config/config.json", "r") as configFile:
+    #     configData = configFile.read()
 
-        poll_frequency = config["PollFrequency"]
-        mode = config["Mode"]
-        temp_unit = str(config["TempUnit"])
-        datetime = config["DateTime"]
-        datetime_timezone = datetime["TimeZone"]
-        datetime_format = datetime["Format"]
+    # config = json.loads(configData)
 
-        if "Sensors" in config:
-            for sensor in config["Sensors"]:
-                port = sensor["Port"]
-                sensorObj = Sensor(
-                    sensor["Name"],
-                    port,
-                    sensor["Pin"],
-                    sensor["SensorType"],
-                    sensor["Comment"],
-                    sensor["MinTemp"],
-                    sensor["MaxTemp"],
-                    sensor["MinHumidity"],
-                    sensor["MaxHumidity"],
-                )
-                sensors[str(port)] = sensorObj
+    # if config:
+    #     if "Server" in config:
+    #         if "Host" in config["Server"]:
+    #             server_host = config["Server"]["Host"]
+
+    #         if "Port" in config["Server"]:
+    #             server_port = config["Server"]["Port"]
+
+    #         if "Debug" in config["Server"]:
+    #             server_debug = bool(strtobool(config["Server"]["Debug"]))
+
+    #     poll_frequency = config["PollFrequency"]
+    #     mode = config["Mode"]
+    #     temp_unit = str(config["TempUnit"])
+    #     datetime = config["DateTime"]
+    #     datetime_timezone = datetime["TimeZone"]
+    #     datetime_format = datetime["Format"]
+
+    #     if "Sensors" in config:
+    #         for sensor in config["Sensors"]:
+    #             port = sensor["Port"]
+    #             sensorObj = Sensor(
+    #                 sensor["Name"],
+    #                 port,
+    #                 sensor["Pin"],
+    #                 sensor["SensorType"],
+    #                 sensor["Comment"],
+    #                 sensor["MinTemp"],
+    #                 sensor["MaxTemp"],
+    #                 sensor["MinHumidity"],
+    #                 sensor["MaxHumidity"],
+    #             )
+    #             sensors[str(port)] = sensorObj
 
     sensorReaderWorkerThread = SensorReaderProcess()
     sensorReaderWorkerThread.start()

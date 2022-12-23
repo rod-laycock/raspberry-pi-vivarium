@@ -139,6 +139,7 @@ Install flask, flask_restful and json2html using
 pip3 install flask
 pip3 install flask_restful
 pip3 install json2html
+pip3 install python-json-config
 
 # API
 
