@@ -143,3 +143,5 @@ pip3 install json2html
 # API
 
 Swagger used with Swagger docs https://github.com/OAI/OpenAPI-Specification/blob/main/versions/2.0.md#operation-object
+
+Swagger is set up to be visible on http://127.0.0.1:5002/api/v1/docs/ (port may be subject to change)
