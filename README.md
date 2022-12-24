@@ -4,7 +4,7 @@ Raspberry Pi Vivarium monitoring / control project.
 color 
 
 ## Introduction.
-I have 4 ball pythons and need to ensure the temperature and humidity are always at the right levels.  So this project is starting life as a simple temperature/humidity sensor & recorder with web access, but over time could build up to include web-cams, temperature controller, over / under temperature alarms, door open sensors, you get the jist.
+I have 3 (had 4 - 1 was a female and the others were starving themselves to try and get some, so she had to be rehomed) ball pythons and need to ensure the temperature and humidity are always at the right levels.  So this project is starting life as a simple temperature/humidity sensor & recorder with web access, but over time could build up to include web-cams, temperature controller, over / under temperature alarms, door open sensors, you get the jist.
 
 
 ### A quick introduction to Pythons
@@ -14,7 +14,7 @@ Snakes don't have eyelid, so need moisture in the air to protect their eyes, and
 
 They are covered in overlapping scales which need to be shed approximately every 4-6 weeks, known as ecdysis.  End to end shedding cycles last about a week, and during this time it's best to have the moisture elevated (up to about 80% moisture), this aids in them shedding as the snake skin is moisturised.  If the moisture is fine, the skin comes off in one.  If the moisture is too low, the skin comes off in chunks in a "blow out".  If the shed is a blow out, you may need to intervene in order to remove any old skin which remains after the shed has completed.
 
-As We need to measure the humidity across the vivarium and the temperature at both ends, we will need 2 sensors per vivarium - so by my maths, that's 8 temperature sensors (+ spares to replace any faulty ones).
+As We need to measure the humidity across the vivarium and the temperature at both ends, we will need 2 sensors per vivarium - so by my maths, that's 6 temperature sensors (+ spares to replace any faulty ones).
 
 [Wikipedia](https://en.wikipedia.org/wiki/Ball_python) has some good stuff on Pythons, if you fancy a read
 
