@@ -1,5 +1,5 @@
 # Raspberry Pi Vivarium Monitor / Controller
-Raspberry Pi Vivarium monitoring / control project..
+Raspberry Pi Vivarium monitoring / control project.
 
 color 
 
