@@ -63,7 +63,7 @@ class SensorReaderProcess(threading.Thread):
                         sensor.temperature = 0
                         sensor.humidity = 0
 
-            time.sleep(poll_frequency)
+            time.sleep(pollFrequency)
 
 #endregion
 
