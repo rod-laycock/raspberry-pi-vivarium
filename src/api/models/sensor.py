@@ -1,7 +1,7 @@
 import time
 from json import JSONEncoder
 
-from models.Adafruit_DHT import Adafruit_DHT
+from api.models.Adafruit_DHT import Adafruit_DHT
 
 # Sensor
 #   Name - so we can see it on screen

@@ -5,12 +5,12 @@ import time
 
 #from setuptools import strtobool
 #from distutils.util import strtobool
-from flask import Flask, request, Response, jsonify
+from flask import Flask, request, Response, jsonify, render_template
 from flask_swagger import swagger
 from flask_swagger_ui import get_swaggerui_blueprint
 from flask_restful import Api
 from json2html import *
-from models.sensor import Sensor, SensorEncoder, SensorReader
+from .models.sensor import Sensor, SensorEncoder, SensorReader
 from python_json_config import ConfigBuilder
 from typing import Dict
 
@@ -115,9 +115,11 @@ def read_config(config: str):
 @app.route("/", methods=["GET"], )
 def get_home():
 
-    swagger_url = request.host_url + SWAGGER_URL
+  #return render_template('index.html')
 
-    return Response("Vivarium Monitoring Application up and running - please see <a href=\"" + swagger_url + "\">" + swagger_url + "</a> for how tro use the API.", status=200, mimetype="text/html")
+  swagger_url = request.host_url + SWAGGER_URL
+
+  return Response("Vivarium Monitoring Application up and running - please see <a href=\"" + swagger_url + "\">" + swagger_url + "</a> for how tro use the API.", status=200, mimetype="text/html")
 
 @app.route(API_ROOT + "/swagger", methods=["GET"], )
 def get_swagger_json():
@@ -378,5 +380,3 @@ if __name__ == "__main__":
 
     #   worker = Worker(sensors, DateTime_Format, pollFrequency)
     #   worker.start()
-
-    app.run(debug=bool(server_debug), host=server_host, port=server_port)

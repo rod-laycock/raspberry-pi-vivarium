@@ -1,0 +1,49 @@
+{
+  "TempUnits": {
+    "Degrees Celsius": "C",
+    "Degrees Fahrenheit" : "F"
+  },
+  "TimeZones": {
+    "UTC": "UTC"
+  },
+  "Sensors" : {
+    "Ports" : {
+      "Min" : 1,
+      "Max" : 8
+    },
+    "Pins" : {
+      "GPIO2 - Pin 3": 3,
+      "GPIO5 - Pin 29" : 29,
+      "GPIO6 - Pin 31" : 31,
+      "GPIO12 - Pin 32" : 32,
+      "GPIO13 - Pin 33" : 33,
+      "GPIO16 - Pin 36" : 36,
+      "GPIO19 - Pin 35" : 35,
+      "GPIO20 - Pin 38" : 38,
+      "GPIO21 - Pin 40" : 40,
+      "GPIO22 - Pin 15" : 15,
+      "GPIO23 - Pin 16" : 16,
+      "GPIO24 - Pin 18" : 18,
+      "GPIO25 - Pin 22" : 22,
+      "GPIO26 - Pin 37" : 37
+    },
+    "SensorTypes" : {
+      "DHT11" : "DHT11",
+      "DHT22" : "DHT22"
+    }
+  },
+  "Logging": {
+    "RetentionPeriodDays" : {
+      "Min": 1,
+      "Max": 365
+    }
+  },
+  "History" : {
+    "RetentionPeriodDays" : {
+      "Min": 1,
+      "Max": 365
+    }
+  }
+
+
+}
