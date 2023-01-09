@@ -5,7 +5,7 @@ import json
 import threading
 import time
 
-from flask import Flask, request, Response, jsonify, render_template
+from flask import Flask, request, Response, jsonify
 from flask_swagger import swagger
 from flask_swagger_ui import get_swaggerui_blueprint
 from flask_restful import Api
@@ -49,7 +49,7 @@ class SensorReaderProcess(threading.Thread):
                     humidity = 0
                     temperature = 0
 
-                    dateTime, humidity, temperature = Reader.Read_Values(sensor)
+                    dateTime, humidity, temperature = SensorReader.Read_Values(sensor)
                     # localtime = time.strftime(datetime_format, time.localtime)
 
                     if humidity is not None and temperature is not None:
@@ -301,7 +301,7 @@ app.register_blueprint(swaggerui_blueprint)
 builder = ConfigBuilder()
 
 # parse config
-config = builder.parse_config("/home/rod/Projects/Code/raspberry-pi-vivarium/src/webservice/config/config.json")
+config = builder.parse_config("/home/rod/Projects/Code/raspberry-pi-vivarium/src/api/config/config.json")
 
 # access elements
 server_host = config.Server.Host
