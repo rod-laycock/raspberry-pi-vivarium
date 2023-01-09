@@ -105,7 +105,7 @@ def format_response(request, req_data):
 # Config - Get the current config values, factory default values and any allowable values.
 #
 def read_config(config: str):
-    with open("/home/rod/Projects/Code/raspberry-pi-vivarium/src/webservice/config/" + config + ".json", "r") as config_file:
+    with open("/home/rod/Projects/Code/raspberry-pi-vivarium/src/api/config/" + config + ".json", "r") as config_file:
         return json.loads(config_file.read())
 
 #endregion
@@ -336,7 +336,7 @@ if __name__ == "__main__":
         )
         sensors[str(port)] = sensorObj
 
-    # with open("/home/rod/Projects/Code/raspberry-pi-vivarium/src/webservice/config/config.json", "r") as configFile:
+    # with open("/home/rod/Projects/Code/raspberry-pi-vivarium/src/api/config/config.json", "r") as configFile:
     #     configData = configFile.read()
 
     # config = json.loads(configData)
