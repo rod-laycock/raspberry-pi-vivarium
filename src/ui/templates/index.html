@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Vivarium Monitoring</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:5000/api/v1/sensors/data",
+                dataType: "json",
+                success: function (result, status, xhr) {
+                    var table = $("<table><tr><th>Vivarium Sensors</th></tr>");
+                    $.each(result, function(index,item) {
+                        table.append("<tr><td>Name:</td><td>" + item["name"] + "</td></tr>");
+                        table.append("<tr><td>Temperature:</td><td>" + item["temperature"] + "°C</td></tr>");
+                        table.append("<tr><td>Humidity:</td><td>" + item["humidity"] + "</td></tr>");
+                    });
+                    $("#message").html(table);
+                },
+                error: function (xhr, status, error) {
+                    alert("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
+                }
+            });
+        
+            $(document).ajaxStart(function () {
+                $("img").show();
+            });
+        
+            $(document).ajaxStop(function () {
+                $("img").hide();
+            });
+        });
+    </script>
+    <style>
+        #viewContent {
+            padding-left: 20px;
+        }
+    
+        #viewContent select, #viewContent button {
+            font-size: 25px;
+        }
+    
+        #viewContent h4 {
+            margin: 10px 0;
+        }
+    
+        #viewContent .textAlignCenter {
+            text-align: center;
+        }
+    
+        #viewContent .textAlignCenter img {
+            display: none;
+            width: 100px;
+        }
+    
+        #viewContent #message table {
+            width: 100%;
+        }
+    
+        #viewContent #message table th {
+            text-align: left;
+            text-decoration: underline;
+        }
+    </style>
+
+    </head>
+    <body>
+        <h1>My Personal Website</h1>
+        <div class="textAlignCenter">
+            <img src="{{ url_for('static', filename='loading.gif') }}" alt="Loading" />
+        </div>
+        <div id="message"></div>
+    </body>
+</html>
