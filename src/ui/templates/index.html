@@ -14,7 +14,7 @@
                     var table = $("<table><tr><th>Vivarium Sensors</th></tr>");
                     $.each(result, function(index,item) {
                         table.append("<tr><td>Name:</td><td>" + item["name"] + "</td></tr>");
-                        table.append("<tr><td>Temperature:</td><td>" + item["temperature"] + "°C</td></tr>");
+                        table.append("<tr><td>Temperature:</td><td>" + item["temperature"] + "°"+ item["tempUnit"] + "</td></tr>");
                         table.append("<tr><td>Humidity:</td><td>" + item["humidity"] + "</td></tr>");
                     });
                     $("#message").html(table);
@@ -67,7 +67,7 @@
 
     </head>
     <body>
-        <h1>My Personal Website</h1>
+        <h1>Vivarium Monitoring</h1>
         <div class="textAlignCenter">
             <img src="{{ url_for('static', filename='loading.gif') }}" alt="Loading" />
         </div>

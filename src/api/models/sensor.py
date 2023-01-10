@@ -16,7 +16,7 @@ from api.models.Adafruit_DHT import Adafruit_DHT
 #   Humidity - this is the recorded humidity
 
 class Sensor():
-    def __init__(self, name, port, pin, sensorType, comment, minTemp, maxTemp, minHumidity, maxHumidity):
+    def __init__(self, name, port, pin, sensorType, comment, minTemp, maxTemp, minHumidity, maxHumidity, tempUnit):
         self.name = name
         self.port = port
         self.pin = pin
@@ -28,6 +28,7 @@ class Sensor():
         self.minHumidity = minHumidity
         self.maxHumidity = maxHumidity
         self.humidity = 0
+        self.tempUnit = tempUnit
 
 # Json Encoder 
 class SensorEncoder(JSONEncoder):
@@ -55,6 +56,11 @@ class SensorReader():
     
     # humidity = 0
     # temperature = 0
-    humidity, temperature = Adafruit_DHT.read_retry(DHT_SENSOR, sensor.pin)
+    humidity, temp = Adafruit_DHT.read_retry(DHT_SENSOR, sensor.pin)
+
+    if sensor.tempUnit == 'C':
+      temperature = temp                # Return degrees C
+    else:
+      temperature = (temp * 1.8) + 32   # Return degrees F
 
     return time.localtime(), humidity, temperature

@@ -181,6 +181,7 @@ def get_sensors_data():
         output_sensor["name"] = sensors[sensor].name
         output_sensor["temperature"] = sensors[sensor].temperature
         output_sensor["humidity"] = sensors[sensor].humidity
+        output_sensor["tempUnit"] = sensors[sensor].tempUnit
         output_sensors.append(output_sensor)
     return format_response(request, output_sensors)
 
@@ -307,6 +308,8 @@ config = builder.parse_config("/home/rod/Projects/Code/raspberry-pi-vivarium/src
 server_host = config.Server.Host
 server_port = config.Server.Port
 server_debug = config.Server.Debug
+sensor_tempUnit = config.TempUnit
+
 
 for sensor in config.Sensors:
     port = sensor["Port"]
@@ -320,6 +323,7 @@ for sensor in config.Sensors:
         sensor["MaxTemp"],
         sensor["MinHumidity"],
         sensor["MaxHumidity"],
+        sensor_tempUnit
     )
     sensors[str(port)] = sensorObj
 
