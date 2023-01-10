@@ -179,7 +179,11 @@ def get_sensors_data():
     for sensor in sensors:
         output_sensor = {}
         output_sensor["name"] = sensors[sensor].name
+        output_sensor["minTemp"] = sensors[sensor].minTemp
+        output_sensor["maxTemp"] = sensors[sensor].maxTemp
         output_sensor["temperature"] = sensors[sensor].temperature
+        output_sensor["minHumidity"] = sensors[sensor].minHumidity
+        output_sensor["maxHumidity"] = sensors[sensor].maxHumidity
         output_sensor["humidity"] = sensors[sensor].humidity
         output_sensor["tempUnit"] = sensors[sensor].tempUnit
         output_sensors.append(output_sensor)
@@ -207,7 +211,11 @@ def get_sensor_data_by_id(port: int):
     sensor = sensors.get(str(port))
     output_sensor = {}
     output_sensor["name"] = sensor.name
+    output_sensor["minTemp"] = sensor.minTemp
+    output_sensor["maxTemp"] = sensor.maxTemp
     output_sensor["temperature"] = sensor.temperature
+    output_sensor["minHumidity"] = sensor.minHumidity
+    output_sensor["maxHumidity"] = sensor.maxHumidity
     output_sensor["humidity"] = sensor.humidity
     output_sensor["tempUnit"] = sensor.tempUnit
     
