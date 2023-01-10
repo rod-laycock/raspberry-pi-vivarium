@@ -209,6 +209,7 @@ def get_sensor_data_by_id(port: int):
     output_sensor["name"] = sensor.name
     output_sensor["temperature"] = sensor.temperature
     output_sensor["humidity"] = sensor.humidity
+    output_sensor["tempUnit"] = sensor.tempUnit
     
     return format_response(request, output_sensor)
 
