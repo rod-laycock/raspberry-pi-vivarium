@@ -175,6 +175,7 @@ def get_sensors_data():
           404:
             description: No sensors configured in the config/config.json file.
     """
+    response = {}
     output_sensors = []
     for sensor in sensors:
         output_sensor = {}
