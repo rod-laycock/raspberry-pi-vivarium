@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Vivarium Monitor</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <style>
+            html {
+                font-family: Arial;
+                display: inline-block;
+                margin: 0px auto;
+                text-align: center;
+            }
+            h2 { font-size: 3.0rem; }
+            p { font-size: 3.0rem; }
+
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
+
+            .viv-name {
+                text-align: left;
+            }
+
+            .range {
+                font-size: 1.0rem;
+                vertical-align:middle;
+            }
+            .range-units { font-size: 0.8rem; }
+            .range-labels { text-align: left; }
+            .range-values { text-align: center; }
+            
+            .reading { 
+                font-size: 1.8rem;
+                vertical-align:middle;
+                padding-bottom: 15px;
+            }
+            .reading-labels { }
+            .reading-units { font-size: 1.2rem; }
+
+            .dht-labels {
+                font-size: 1.5rem;
+                vertical-align:middle;
+                padding-bottom: 15px;
+            }
+
+            .temp-high { color: #9e050d; }
+            .temp-low { color: #14059e; }
+            .temp-normal { color: #059e8a; }
+
+            .humidity-high { color: #9e050d;}
+            .humidity-low { color: #14059e; }
+            .humidity-normal { color: #00add6;}
+
+        </style>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="col-lg-12 mx-auto p-2 py-md-2">
+                <header class="">
+                    <span class="d-flex border-bottom fs-1">Vivarium Monitor</span>
+                    <div class="text-end border-bottom">
+                        hh:mm:ss dd/mm/yyyy
+                    </div>
+                </header>
+                <main class="bd-content">
+
+<!-- Iterate this sensor -->
+                    <a href="#">
+                        <!-- Title -->
+                        <div class="row viv-name">
+                            <div class="col-12">
+                                <span class="fs-2">Pumpkin</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Viv -->
+                        <div class="row">
+
+                            <!-- Readings -->
+                            <div class="col-12">
+                                <!-- Readings -->
+                                <div class="row reading">
+                                    <!-- Hot -->
+                                    <div class="col-5">
+                                        <span class="fs-3">Hot</span>
+                                        <p>
+                                            <i class="fas fa-thermometer-half temp-normal"></i> 
+                                            <span id="temperature">23.40</span>
+                                            <sup class="units">&deg;C</sup>
+                                        </p>
+                                        <p>
+                                            <i class="fas fa-tint humidity-normal"></i> 
+                                            <span id="humidity">38.70</span>
+                                            <sup class="units">&percnt;</sup>
+                                        </p>
+                                    </div>
+                                    <!-- Cold -->
+                                    <div class="col-5">
+                                        <span class="fs-3">Cold</span>
+                                        <p>
+                                            <i class="fas fa-thermometer-half temp-normal"></i> 
+                                            <span id="temperature">23.40</span>
+                                            <sup class="units">&deg;C</sup>
+                                        </p>
+                                        <p>
+                                            <i class="fas fa-tint humidity-normal"></i> 
+                                            <span id="humidity">38.70</span>
+                                            <sup class="units">&percnt;</sup>
+                                        </p>
+                                    </div>
+                                    <!-- Range -->
+                                    <div class="col-2">
+                                        <div class="range">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col"></th>
+                                                        <th scope="col">Min</th>
+                                                        <th scope="col">Max</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row" class="range-labels">Temp</td>
+                                                        <td class="range-values">
+                                                            <i class="fas fa-thermometer-empty" style="color:#14059e;"></i> 
+                                                            <span id="min-temperature">28.00</span>
+                                                            <sup class="range-units">&deg;C</sup></td>
+                                                        <td class="range-values">
+                                                            <i class="fas fa-thermometer-full" style="color:#9e050d;"></i> 
+                                                            <span id="max-temperature">40.00</span>
+                                                            <sup class="range-units">&deg;C</sup>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row" class="range-labels">Humidity</td>
+                                                        <td class="range-values">
+                                                            <i class="fas fa-tint-slash" style="color:#14059e;"></i> 
+                                                            <span id="min-humidity">25.00</span>
+                                                            <sup class="range-units">&percnt;</sup>
+                                                        </td>
+                                                        <td class="range-values">
+                                                            <i class="fas fa-thermometer-full" style="color:#9e050d;"></i> 
+                                                            <span id="max-temperature">40.00</span>
+                                                            <sup class="range-units">&deg;C</sup>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            
+                            </div>
+                        </div>
+                    </a>
+<!-- End Iterate this sensor -->
+        
+                    <a href="#">
+                        <!-- Title -->
+                        <div class="row viv-name">
+                            <div class="col-12">
+                                <span class="fs-2">Freddy</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Viv -->
+                        <div class="row">
+
+                            <!-- Readings -->
+                            <div class="col-12">
+                                <!-- Readings -->
+                                <div class="row reading">
+                                    <!-- Hot -->
+                                    <div class="col-5">
+                                        <span class="fs-3">Hot</span>
+                                        <p>
+                                            <i class="fas fa-thermometer-half" style="color:#059e8a;"></i> 
+                                            <span id="temperature">23.40</span>
+                                            <sup class="units">&deg;C</sup>
+                                        </p>
+                                        <p>
+                                            <i class="fas fa-tint" style="color:#00add6;"></i> 
+                                            <span id="humidity">38.70</span>
+                                            <sup class="units">&percnt;</sup>
+                                        </p>
+                                    </div>
+                                    <!-- Cold -->
+                                    <div class="col-5">
+                                        <span class="fs-3">Cold</span>
+                                        <p>
+                                            <i class="fas fa-thermometer-half" style="color:#059e8a;"></i> 
+                                            <span id="temperature">23.40</span>
+                                            <sup class="units">&deg;C</sup>
+                                        </p>
+                                        <p>
+                                            <i class="fas fa-tint" style="color:#00add6;"></i> 
+                                            <span id="humidity">38.70</span>
+                                            <sup class="units">&percnt;</sup>
+                                        </p>
+                                    </div>
+                                    <!-- Range -->
+                                    <div class="col-2">
+                                        <div class="range">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col"></th>
+                                                        <th scope="col">Min</th>
+                                                        <th scope="col">Max</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row" class="range-labels">Temp</td>
+                                                        <td class="range-values">
+                                                            <i class="fas fa-thermometer-empty" style="color:#14059e;"></i> 
+                                                            <span id="min-temperature">28.00</span>
+                                                            <sup class="range-units">&deg;C</sup></td>
+                                                        <td class="range-values">
+                                                            <i class="fas fa-thermometer-full" style="color:#9e050d;"></i> 
+                                                            <span id="max-temperature">40.00</span>
+                                                            <sup class="range-units">&deg;C</sup>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row" class="range-labels">Humidity</td>
+                                                        <td class="range-values">
+                                                            <i class="fas fa-tint-slash" style="color:#14059e;"></i> 
+                                                            <span id="min-humidity">25.00</span>
+                                                            <sup class="range-units">&percnt;</sup>
+                                                        </td>
+                                                        <td class="range-values">
+                                                            <i class="fas fa-thermometer-full" style="color:#9e050d;"></i> 
+                                                            <span id="max-temperature">40.00</span>
+                                                            <sup class="range-units">&deg;C</sup>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            
+                            </div>
+                        </div>
+                    </a>
+        
+                    <a href="#">
+                        <!-- Title -->
+                        <div class="row viv-name">
+                            <div class="col-12">
+                                <span class="fs-2">Nagini</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Viv -->
+                        <div class="row">
+
+                            <!-- Readings -->
+                            <div class="col-12">
+                                <!-- Readings -->
+                                <div class="row reading">
+                                    <!-- Hot -->
+                                    <div class="col-5">
+                                        <span class="fs-3">Hot</span>
+                                        <p>
+                                            <i class="fas fa-thermometer-half" style="color:#059e8a;"></i> 
+                                            <span id="temperature">23.40</span>
+                                            <sup class="units">&deg;C</sup>
+                                        </p>
+                                        <p>
+                                            <i class="fas fa-tint" style="color:#00add6;"></i> 
+                                            <span id="humidity">38.70</span>
+                                            <sup class="units">&percnt;</sup>
+                                        </p>
+                                    </div>
+                                    <!-- Cold -->
+                                    <div class="col-5">
+                                        <span class="fs-3">Cold</span>
+                                        <p>
+                                            <i class="fas fa-thermometer-half" style="color:#059e8a;"></i> 
+                                            <span id="temperature">23.40</span>
+                                            <sup class="units">&deg;C</sup>
+                                        </p>
+                                        <p>
+                                            <i class="fas fa-tint" style="color:#00add6;"></i> 
+                                            <span id="humidity">38.70</span>
+                                            <sup class="units">&percnt;</sup>
+                                        </p>
+                                    </div>
+                                    <!-- Range -->
+                                    <div class="col-2">
+                                        <div class="range">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col"></th>
+                                                        <th scope="col">Min</th>
+                                                        <th scope="col">Max</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row" class="range-labels">Temp</td>
+                                                        <td class="range-values">
+                                                            <i class="fas fa-thermometer-empty" style="color:#14059e;"></i> 
+                                                            <span id="min-temperature">28.00</span>
+                                                            <sup class="range-units">&deg;C</sup></td>
+                                                        <td class="range-values">
+                                                            <i class="fas fa-thermometer-full" style="color:#9e050d;"></i> 
+                                                            <span id="max-temperature">40.00</span>
+                                                            <sup class="range-units">&deg;C</sup>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row" class="range-labels">Humidity</td>
+                                                        <td class="range-values">
+                                                            <i class="fas fa-tint-slash" style="color:#14059e;"></i> 
+                                                            <span id="min-humidity">25.00</span>
+                                                            <sup class="range-units">&percnt;</sup>
+                                                        </td>
+                                                        <td class="range-values">
+                                                            <i class="fas fa-thermometer-full" style="color:#9e050d;"></i> 
+                                                            <span id="max-temperature">40.00</span>
+                                                            <sup class="range-units">&deg;C</sup>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            
+                            </div>
+                        </div>
+                    </a>
+
+                </main>
+                <footer class="pt-1 my-1 border-top">
+                    <div class="text-end">
+                        Rod Laycock &middot; &copy; 2023
+                    </div>
+                </footer>
+            </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function () {
+                // TODO: Get the timeout interval from settings - make a call to the API to get the PollFrequency
+                
+                // TODO: Amend the API to return the Date/Time according to the config format, so we can display it on screen
+
+                // Start calling API to get the sensor data
+                getVivariumReadings();
+            
+            });
+
+            // function getVivariumReadings() {
+            //     $.ajax({
+            //         type: "GET",
+            //         url: "http://localhost:5000/api/v1/sensors/data",
+            //         dataType: "json",
+            //         success: function (result, status, xhr) {
+            //             var table = $("<table><tr><th>Vivarium Sensors</th></tr>");
+            //             $.each(result, function(index,item) {
+            //                 table.append("<tr><td>Name:</td><td>" + item["name"] + "</td></tr>");
+            //                 table.append("<tr><td>Temperature:</td><td>" + item["temperature"] + "°"+ item["tempUnit"] + "</td></tr>");
+            //                 table.append("<tr><td>Humidity:</td><td>" + item["humidity"] + "</td></tr>");
+            //             });
+            //             $("#message").html(table);
+            //         },
+            //         error: function (xhr, status, error) {
+            //             alert("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
+            //         }
+            //     });
+            
+                // $(document).ajaxStart(function () {
+                //     $("img").show();
+                // });
+            
+                // $(document).ajaxStop(function () {
+                //     $("img").hide();
+                // });
+            }
+
+            setInterval(function(){
+                getVivariumReadings();
+            },5000);
+        </script>
+    </body>
+</html>
