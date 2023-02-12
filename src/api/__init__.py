@@ -10,7 +10,11 @@ from flask_swagger import swagger
 from flask_swagger_ui import get_swaggerui_blueprint
 from flask_restful import Api
 from json2html import *
-from .models.sensor import Sensor, SensorEncoder, SensorReader
+from models.sensor import Sensor, SensorEncoder
+from models.server import Server
+from models.vivaria import Vivaria
+from models.vivarium import Vivarium
+from models.sensorReader import SensorReader
 from python_json_config import ConfigBuilder
 from typing import Dict
 #endregion
@@ -25,7 +29,9 @@ API_URL = API_ROOT + '/swagger'  # Our API url (can of course be a local resourc
 app = Flask(__name__)
 app.debug = True
 
-sensors: Dict[str, Sensor] = {}
+vivaria: Vivaria
+
+
 pollFrequency: int = 0
 mode: str = ""
 temp_unit: str  = "C"
@@ -42,24 +48,25 @@ class SensorReaderProcess(threading.Thread):
         threading.Thread.__init__(self)
 
     def run(self):
-        while True:
-            for sensorPort in sensors:
-                if sensorPort:
-                    sensor = sensors[sensorPort]
-                    humidity = 0
-                    temperature = 0
+      while True:
+        for viv in vivaria.vivarium:
+          for sensorPort in viv['sensors']:
+            if sensorPort:
+                sensor = viv['sensors'][sensorPort]
+                humidity = 0
+                temperature = 0
 
-                    dateTime, humidity, temperature = SensorReader.Read_Values(sensor)
-                    # localtime = time.strftime(datetime_format, time.localtime)
+                dateTime, humidity, temperature = SensorReader.Read_Values(sensor)
+                # localtime = time.strftime(datetime_format, time.localtime)
 
-                    if humidity is not None and temperature is not None:
-                        sensor.temperature = temperature
-                        sensor.humidity = humidity
-                    else:
-                        sensor.temperature = 0
-                        sensor.humidity = 0
+                if humidity is not None and temperature is not None:
+                    sensor.temperature = temperature
+                    sensor.humidity = humidity
+                else:
+                    sensor.temperature = 0
+                    sensor.humidity = 0
 
-            time.sleep(pollFrequency)
+        time.sleep(pollFrequency)
 #endregion
 
 #region Common routines to help with all the API requests
@@ -305,7 +312,12 @@ swaggerui_blueprint = get_swaggerui_blueprint(
     #    'additionalQueryStringParams': {'test': "hello"}
     # }
 )
+
+#region Main Routine
 app.register_blueprint(swaggerui_blueprint)
+
+#endregion
+
 
 # Read the configuration file
 # create config parser
@@ -314,70 +326,40 @@ builder = ConfigBuilder()
 # parse config
 config = builder.parse_config("/home/rod/Projects/Code/raspberry-pi-vivarium/src/api/config/config.json")
 
+server = Server(config.Server.Host, config.Server.Port, config.Server.Debug)
+
 # access elements
-server_host = config.Server.Host
-server_port = config.Server.Port
-server_debug = config.Server.Debug
 sensor_tempUnit = config.TempUnit
+mode = config.Mode
+pollFrequency = config.PollFrequency
 
+vivaria = Vivaria(config.Vivaria.Title)
 
-for sensor in config.Sensors:
-    port = sensor["Port"]
-    sensorObj = Sensor(
-        sensor["Name"],
-        port,
-        sensor["Pin"],
-        sensor["SensorType"],
-        sensor["Comment"],
-        sensor["MinTemp"],
-        sensor["MaxTemp"],
-        sensor["MinHumidity"],
-        sensor["MaxHumidity"],
-        sensor_tempUnit
-    )
-    sensors[str(port)] = sensorObj
+for viv in config.Vivaria.Vivarium:
+  vivarium = Vivarium(viv['Name'], viv['Location'])
 
-# with open("/home/rod/Projects/Code/raspberry-pi-vivarium/src/webservice/config/config.json", "r") as configFile:
-#     configData = configFile.read()
+  for sensor in viv['Sensors']:
+      port = sensor["Port"]
+      sensorObj = Sensor(
+          sensor["Name"],
+          port,
+          sensor["Pin"],
+          sensor["SensorType"],
+          sensor["Comment"],
+          sensor["MinTemperature"],
+          sensor["MaxTemperature"],
+          sensor["MonitorTemperature"],
+          sensor["MinHumidity"],
+          sensor["MaxHumidity"],
+          sensor["MonitorHumidity"],
+          sensor_tempUnit
+      )
+      vivarium.sensors[str(port)] = sensorObj
 
-# config = json.loads(configData)
-
-# if config:
-#     if "Server" in config:
-#         if "Host" in config["Server"]:
-#             server_host = config["Server"]["Host"]
-
-#         if "Port" in config["Server"]:
-#             server_port = config["Server"]["Port"]
-
-#         if "Debug" in config["Server"]:
-#             server_debug = bool(strtobool(config["Server"]["Debug"]))
-
-#     poll_frequency = config["PollFrequency"]
-#     mode = config["Mode"]
-#     temp_unit = str(config["TempUnit"])
-#     datetime = config["DateTime"]
-#     datetime_timezone = datetime["TimeZone"]
-#     datetime_format = datetime["Format"]
-
-#     if "Sensors" in config:
-#         for sensor in config["Sensors"]:
-#             port = sensor["Port"]
-#             sensorObj = Sensor(
-#                 sensor["Name"],
-#                 port,
-#                 sensor["Pin"],
-#                 sensor["SensorType"],
-#                 sensor["Comment"],
-#                 sensor["MinTemp"],
-#                 sensor["MaxTemp"],
-#                 sensor["MinHumidity"],
-#                 sensor["MaxHumidity"],
-#             )
-#             sensors[str(port)] = sensorObj
+vivaria.vivarium = vivarium
 
 sensorReaderWorkerThread = SensorReaderProcess()
 sensorReaderWorkerThread.start()
 
-#   worker = Worker(sensors, DateTime_Format, pollFrequency)
-#   worker.start()
+if __name__ == "__main__":
+  app.run(host=server.host, port=server.port, debug=server.debug)

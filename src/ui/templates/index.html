@@ -1,9 +1,81 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Vivarium Monitoring</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <style>
+            html {
+                font-family: Arial;
+                display: inline-block;
+                margin: 0px auto;
+                text-align: center;
+            }
+            h2 { font-size: 3.0rem; }
+            p { font-size: 3.0rem; }
+            .units { font-size: 1.2rem; }
+            .dht-labels{
+                font-size: 1.5rem;
+                vertical-align:middle;
+                padding-bottom: 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Snake Vivarium</h2>
+                </div>
+            </div>
+<hr/>
+
+            <p>
+            <i class="fas fa-thermometer-half" style="color:#059e8a;"></i> 
+            <span id="temperature">23.40</span>
+            <sup class="units">&deg;C</sup>
+            </p>
+            <p>
+            <i class="fas fa-tint" style="color:#00add6;"></i> 
+            <span id="humidity">38.70</span>
+            <sup class="units">&percnt;</sup>
+            </p>
+        </div>
+
+        <div class="container">
+                    <h3>S</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    Pumpkin
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p><i class="fas fa-thermometer-half" style="color:#059e8a;"></i>30</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <i class="fas fa-tint" style="color:#00add6;"></i> 
+                        <p>45</p>
+                    </div>
+                </div>
+                 
+            </div>
+            
+
+            
+            <div class="textAlignCenter">
+                <!-- <img src="{{ url_for('static', filename='loading.gif') }}" alt="Loading" /> -->
+            </div>
+            <div id="message"></div>
+        </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <script>
             $(document).ready(function () {
                 // TODO: Get the timeout interval from settings - make a call to the API to get the PollFrequency
@@ -15,24 +87,24 @@
             
             });
 
-            function getVivariumReadings() {
-                $.ajax({
-                    type: "GET",
-                    url: "http://localhost:5000/api/v1/sensors/data",
-                    dataType: "json",
-                    success: function (result, status, xhr) {
-                        var table = $("<table><tr><th>Vivarium Sensors</th></tr>");
-                        $.each(result, function(index,item) {
-                            table.append("<tr><td>Name:</td><td>" + item["name"] + "</td></tr>");
-                            table.append("<tr><td>Temperature:</td><td>" + item["temperature"] + "°"+ item["tempUnit"] + "</td></tr>");
-                            table.append("<tr><td>Humidity:</td><td>" + item["humidity"] + "</td></tr>");
-                        });
-                        $("#message").html(table);
-                    },
-                    error: function (xhr, status, error) {
-                        alert("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
-                    }
-                });
+            // function getVivariumReadings() {
+            //     $.ajax({
+            //         type: "GET",
+            //         url: "http://localhost:5000/api/v1/sensors/data",
+            //         dataType: "json",
+            //         success: function (result, status, xhr) {
+            //             var table = $("<table><tr><th>Vivarium Sensors</th></tr>");
+            //             $.each(result, function(index,item) {
+            //                 table.append("<tr><td>Name:</td><td>" + item["name"] + "</td></tr>");
+            //                 table.append("<tr><td>Temperature:</td><td>" + item["temperature"] + "°"+ item["tempUnit"] + "</td></tr>");
+            //                 table.append("<tr><td>Humidity:</td><td>" + item["humidity"] + "</td></tr>");
+            //             });
+            //             $("#message").html(table);
+            //         },
+            //         error: function (xhr, status, error) {
+            //             alert("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
+            //         }
+            //     });
             
                 // $(document).ajaxStart(function () {
                 //     $("img").show();
@@ -47,44 +119,5 @@
                 getVivariumReadings();
             },5000);
         </script>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-        <style>
-            #viewContent {
-                padding-left: 20px;
-            }
-        
-            #viewContent select, #viewContent button {
-                font-size: 25px;
-            }
-        
-            #viewContent h4 {
-                margin: 10px 0;
-            }
-        
-            #viewContent .textAlignCenter {
-                text-align: center;
-            }
-        
-            #viewContent .textAlignCenter img {
-                display: none;
-                width: 100px;
-            }
-        
-            #viewContent #message table {
-                width: 100%;
-            }
-        
-            #viewContent #message table th {
-                text-align: left;
-                text-decoration: underline;
-            }
-        </style>
-    </head>
-    <body>
-        <h1>Vivarium Monitoring</h1>
-        <div class="textAlignCenter">
-            <!-- <img src="{{ url_for('static', filename='loading.gif') }}" alt="Loading" /> -->
-        </div>
-        <div id="message"></div>
     </body>
 </html>

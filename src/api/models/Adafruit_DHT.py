@@ -3,7 +3,7 @@ from datetime import datetime
 import random
 
 
-class Adafruit_DHT:
+class Adafruit_DHT():
     DHT11 = 1
     DHT22 = 2
 
