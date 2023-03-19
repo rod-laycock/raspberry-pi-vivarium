@@ -1,7 +1,17 @@
 # Raspberry Pi Vivarium Monitor / Controller
 Raspberry Pi Vivarium monitoring / control project.
 
-color 
+
+
+# 19/03/2023 IMPORTANT UPDATE
+So I have now been looking for a Rasperry Pi Zero for well over 12 months, these things are as rare as unicorn farts in tornado.  As such I have taken the decision to shelve Python monitoring Pythons (which is a shame as I loved the concept) and moved over to an ESP32 running C++
+
+Please feel free to join me over on the following:
+
+[Vivarium Monitoring Project](https://github.com/rod-laycock/VivariumMonitoring)
+
+As a conclusion, I will probably pick this back up as a hobby using something other than a Pi Zero W - or I will conclude it once they become more freely available.
+
 
 ## Introduction.
 I have 3 (had 4 - 1 was a female and the others were starving themselves to try and get some, so she had to be rehomed) ball pythons and need to ensure the temperature and humidity are always at the right levels.  So this project is starting life as a simple temperature/humidity sensor & recorder with web access, but over time could build up to include web-cams, temperature controller, over / under temperature alarms, door open sensors, you get the jist.
